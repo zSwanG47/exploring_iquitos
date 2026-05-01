@@ -1,7 +1,7 @@
 import { useState, useEffect, useCallback } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import { PayPalButtons } from '@paypal/react-paypal-js'
-import { getTourById } from '../data/toursData'
+import { getTourById, getLocalizedTour } from '../data/toursData'
 import { supabase } from '../supabaseClient'
 import { useLang } from '../context/LanguageContext'
 import { useTourPrices } from '../context/TourPricesContext'
@@ -9,10 +9,10 @@ import { useTourPrices } from '../context/TourPricesContext'
 export default function Reservar() {
   const { id } = useParams()
   const navigate = useNavigate()
-  const { t } = useLang()
+  const { t, lang } = useLang()
   const tr = t.reservar
   const prices = useTourPrices()
-  const tour = getTourById(id)
+  const tour = getLocalizedTour(getTourById(id), lang)
 
   const [form, setForm] = useState({
     nombres: '',
