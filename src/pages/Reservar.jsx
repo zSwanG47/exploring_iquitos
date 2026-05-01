@@ -14,7 +14,7 @@ export default function Reservar() {
   const tr = t.reservar
   const prices = useTourPrices()
   const tour = getLocalizedTour(getTourById(id), lang)
-  const { setDirty, safeNavigate } = useNavigationGuard()
+  const { dirty, setDirty, safeNavigate } = useNavigationGuard()
 
   const [form, setForm] = useState({
     nombres: '',
