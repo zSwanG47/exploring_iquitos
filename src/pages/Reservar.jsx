@@ -425,7 +425,7 @@ export default function Reservar() {
                       value={form.descripcion}
                       onChange={handleChange}
                       rows={4}
-                      placeholder="Cuéntanos cualquier detalle especial: alergias, preferencias de alojamiento, restricciones, etc."
+                      placeholder={tr.descripcionPh}
                     />
                   </div>
                 </div>
@@ -440,8 +440,7 @@ export default function Reservar() {
                         <span className="fs-6 fw-normal text-muted ms-2">USD</span>
                       </div>
                       <div className="text-muted small mt-1">
-                        ${price} × {form.personas}{' '}
-                        {tr.personaOpt(Number(form.personas))}
+                        ${price} × {tr.personaOpt(Number(form.personas))}
                       </div>
                     </div>
                     <button
