@@ -1,13 +1,13 @@
 import { useEffect } from 'react'
 import { useParams, useNavigate, Link } from 'react-router-dom'
-import { getTourById } from '../data/toursData'
+import { getTourById, getLocalizedTour } from '../data/toursData'
 import { useLang } from '../context/LanguageContext'
 import { useTourPrices } from '../context/TourPricesContext'
 
 export default function TourDetail() {
   const { id } = useParams()
   const navigate = useNavigate()
-  const { t } = useLang()
+  const { t, lang } = useLang()
   const td = t.tourDetail
   const prices = useTourPrices()
 
@@ -15,7 +15,7 @@ export default function TourDetail() {
     window.scrollTo(0, 0)
   }, [id])
 
-  const tour = getTourById(id)
+  const tour = getLocalizedTour(getTourById(id), lang)
 
   if (!tour) {
     return (

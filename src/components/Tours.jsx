@@ -1,9 +1,10 @@
 import { Link } from 'react-router-dom'
-import { tours } from '../data/toursData'
+import { tours, getLocalizedTour } from '../data/toursData'
 import { useLang } from '../context/LanguageContext'
 import { useTourPrices } from '../context/TourPricesContext'
 
-function TourCard({ tour, t, price }) {
+function TourCard({ tour, t, price, lang }) {
+  tour = getLocalizedTour(tour, lang)
   return (
     <div className="col-md-6 col-xl-4 d-flex">
       <div className="tour-card card w-100">
@@ -56,7 +57,7 @@ function TourCard({ tour, t, price }) {
 }
 
 export default function Tours() {
-  const { t } = useLang()
+  const { t, lang } = useLang()
   const prices = useTourPrices()
   return (
     <section id="tours" className="py-5 bg-white">
@@ -70,7 +71,7 @@ export default function Tours() {
         </div>
         <div className="row g-4 justify-content-center">
           {tours.map((tour) => (
-            <TourCard key={tour.id} tour={tour} t={t} price={prices[tour.id] ?? tour.price} />
+            <TourCard key={tour.id} tour={tour} t={t} price={prices[tour.id] ?? tour.price} lang={lang} />
           ))}
         </div>
       </div>

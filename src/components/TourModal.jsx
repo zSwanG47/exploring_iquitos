@@ -1,6 +1,8 @@
 import { useEffect, useRef } from 'react'
 import { Modal } from 'bootstrap'
 import { useTourPrices } from '../context/TourPricesContext'
+import { useLang } from '../context/LanguageContext'
+import { getLocalizedTour } from '../data/toursData'
 
 const WA_NUMBER = '51999999999'
 
@@ -8,6 +10,8 @@ export default function TourModal({ tour, onClose }) {
   const modalRef = useRef(null)
   const bsModalRef = useRef(null)
   const prices = useTourPrices()
+  const { lang } = useLang()
+  const localTour = getLocalizedTour(tour, lang)
   const price = tour ? (prices[tour.id] ?? tour.price) : 0
 
   // Inicializar instancia Bootstrap Modal una sola vez
@@ -31,9 +35,9 @@ export default function TourModal({ tour, onClose }) {
     }
   }, [tour])
 
-  const msg = tour
+  const msg = localTour
     ? encodeURIComponent(
-        `Hola, me interesa el ${tour.name} (${tour.subtitle}) por $${price} USD. Quisiera mas informacion.`
+        `Hola, me interesa el ${localTour.name} (${localTour.subtitle}) por $${price} USD. Quisiera mas informacion.`
       )
     : ''
   const waLink = `https://wa.me/${WA_NUMBER}?text=${msg}`
@@ -53,12 +57,12 @@ export default function TourModal({ tour, onClose }) {
           <div className="modal-header" style={{ backgroundColor: 'var(--green-primary)' }}>
             <div>
               <h5 className="modal-title text-white fw-bold mb-0" id="tourModalLabel">
-                {tour?.name}
+                {localTour?.name}
               </h5>
-              {tour && (
+              {localTour && (
                 <small className="text-white-50">
                   <i className="bi bi-clock me-1" />
-                  {tour.subtitle} &mdash; ${price} USD / persona
+                  {localTour.subtitle} &mdash; ${price} USD / persona
                 </small>
               )}
             </div>
@@ -79,7 +83,7 @@ export default function TourModal({ tour, onClose }) {
                   <div className="col-md-4">
                     <img
                       src={tour.image}
-                      alt={tour.name}
+                      alt={localTour.name}
                       className="img-fluid w-100"
                       style={{ maxHeight: '240px', objectFit: 'cover' }}
                     />
@@ -88,13 +92,13 @@ export default function TourModal({ tour, onClose }) {
                     <h6 className="fw-bold mb-2" style={{ color: 'var(--green-primary)' }}>
                       Descripcion
                     </h6>
-                    <p className="text-muted mb-3">{tour.description}</p>
+                    <p className="text-muted mb-3">{localTour.description}</p>
 
                     <h6 className="fw-bold mb-2" style={{ color: 'var(--green-primary)' }}>
                       Incluye
                     </h6>
                     <div className="d-flex flex-wrap gap-2 mb-3">
-                      {tour.includes.map((item) => (
+                      {localTour.includes.map((item) => (
                         <span
                           key={item}
                           className="badge rounded-pill"

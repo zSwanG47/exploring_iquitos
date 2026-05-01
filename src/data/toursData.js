@@ -312,3 +312,247 @@ export const tours = [
 export function getTourById(id) {
   return tours.find((t) => t.id === id) || null
 }
+
+// ── English translations ──────────────────────────────────────
+const toursEn = {
+  'tour-amazonas-5d-4n': {
+    name: 'Tour Amazonas',
+    subtitle: '5 Days / 4 Nights',
+    description: 'The most complete Amazon experience. Explore the deep jungle, spot wildlife, visit native communities and navigate the majestic Amazonian rivers.',
+    includes: ['Breakfast, Lunch and Dinner', 'Jungle lodge accommodation', 'River and land transport', 'Professional local guide'],
+    notIncludes: ['Soft drinks or other beverages', 'Flashlight', 'Rain poncho', 'Bug repellent'],
+    toBring: ['Mosquito repellent', 'Rain poncho', 'Flashlight', 'Long-sleeved shirt', 'Long pants'],
+    days: [
+      {
+        day: 1,
+        title: 'Arrival – Lodge – Amazonian Sunset',
+        activities: [
+          'Pickup from airport or hotel and transfer to Bella Vista Nanay port.',
+          'The guide will provide an overview of the Nanay and Amazon rivers, and typical Amazonian cuisine.',
+          'Boat departure at 9:30am.',
+          'Visit to Pilpintu Wasi animal rescue center (approx. 20 min by boat): anteater, jaguar, monkeys, otters and river wolf.',
+          'Visit to Kukama Uka native community: traditional dances, beverages such as pururuka and masato, and participation in their rituals.',
+          'Approx. 49-minute navigation to the lodge. Welcome and room check-in with all basic amenities.',
+          'The guide will explain meal schedules and the complete itinerary.',
+          'At 5:30pm, departure to Santa Maria de Fatima community port to watch the Amazonian sunset and dolphins.',
+        ],
+      },
+      {
+        day: 2,
+        title: 'Viewpoint – Paiche – Artisanal Fishing',
+        activities: [
+          'At 9:30am departure to the Tourist Viewpoint in Independencia native community (approx. 25 min).',
+          'Enjoy the landscape towards the Amazon River and relax in hammocks.',
+          'Visit to Fundo Don Pedrito: sighting of the paiche (the largest freshwater fish), caimans, anaconda and turtles.',
+          'Return to the lodge for lunch at 1:30pm with typical Amazonian dishes such as paiche and doncella.',
+        ],
+      },
+      {
+        day: 3,
+        title: 'Botanical Walk – Artisanal Fishing',
+        activities: [
+          'At 9:30am start of the botanical walk in the Amazon jungle.',
+          'The guide will explain medicinal plants and trees; primate and butterfly spotting.',
+          'Return to the lodge for lunch.',
+          'At 3:00pm departure for artisanal and sport fishing.',
+          'The guide will explain traditional fishing techniques.',
+          'Enjoy the Amazonian scenery. Option to purchase soft drinks, beers and Amazonian ceviche.',
+        ],
+      },
+      {
+        day: 4,
+        title: 'Monkey Island – Butterfly Garden',
+        activities: [
+          'At 9:00am departure to Monkey Island (approx. 35 min by boat).',
+          'Local guide will share information about 16 monkey species in their natural habitat. Tour of approx. 1 hour 20 minutes.',
+          'Return to the lodge.',
+          'At 3:30pm visit to the Butterfly Garden: various butterfly species, information about their metamorphosis and lifespan.',
+        ],
+      },
+      {
+        day: 5,
+        title: 'Sugar Mill – Yahuas Community – Return to Iquitos',
+        activities: [
+          'At 9:00am visit to the Artisanal Sugar Mill: sugar cane juice extraction and tasting of exotic and medicinal beverages.',
+          'Visit to Yahuas native community (Champas): culture, traditions and blowpipe (pukuna) demonstration. Visitors can participate.',
+          'Return to the lodge for lunch.',
+          'Pack luggage and return to Iquitos city.',
+          'Tour ends at Bella Vista Nanay port. The guide will advise on transport to the airport or hotel.',
+        ],
+      },
+    ],
+  },
+  'tour-isla-bonita-4d-3n': {
+    name: 'Tour Isla Bonita',
+    subtitle: '4 Days / 3 Nights',
+    description: 'Explore the beautiful Isla Bonita on the Amazon. Native communities, wildlife, botanical walk, artisanal fishing and Monkey Island in a 4-day itinerary.',
+    includes: ['Breakfast, Lunch and Dinner', 'Jungle lodge accommodation', 'River and land transport', 'Professional local guide'],
+    notIncludes: ['Soft drinks or other beverages', 'Flashlight', 'Rain poncho', 'Bug repellent'],
+    toBring: ['Mosquito repellent', 'Rain poncho', 'Flashlight', 'Long shirt and pants'],
+    days: [
+      {
+        day: 1,
+        title: 'Arrival – Lodge – Amazonian Sunset',
+        activities: [
+          'Pickup from airport or hotel and transfer to Bella Vista Nanay port.',
+          'The guide will provide an overview of the Nanay and Amazon rivers, and typical Amazonian cuisine.',
+          'Boat departure at 9:30am.',
+          'Visit to Pilpintu Wasi animal rescue center (approx. 20 min): anteater, jaguar, monkeys, otters and river wolf.',
+          'Visit to Kukama Uka native community: traditional dances, beverages such as pururuka and masato, and invitation to dance to the rhythm of their flutes and drums.',
+          'Approx. 49-minute navigation to the lodge. Welcome and room check-in with all basic amenities.',
+          'The guide will explain meal schedules and the itinerary activities.',
+          'At 5:30pm, departure to Santa Maria de Fatima community port to watch the Amazonian sunset and dolphins.',
+        ],
+      },
+      {
+        day: 2,
+        title: 'Viewpoint – Fundo Don Pedrito – Typical Lunch',
+        activities: [
+          'At 9:30am departure to the Tourist Viewpoint in Independencia native community (approx. 25 min).',
+          'Enjoy the landscape towards the Amazon River and relax in hammocks (25 min).',
+          'Visit to Fundo Don Pedrito: sighting of the paiche (largest freshwater fish), caimans, anaconda and turtles.',
+          'Return to the lodge. Lunch at 1:30pm with typical Amazonian dishes: paiche and doncella.',
+        ],
+      },
+      {
+        day: 3,
+        title: 'Botanical Walk – Artisanal Fishing',
+        activities: [
+          'At 9:30am start of the botanical walk in the Amazon jungle.',
+          'The guide will explain medicinal plants and trees. Primate and butterfly spotting.',
+          'Return to the lodge for lunch.',
+          'At 3:00pm departure for artisanal and sport fishing.',
+          'The guide will explain traditional fishing techniques.',
+          'Enjoy the Amazonian scenery. Option to purchase soft drinks, beers and Amazonian ceviche.',
+        ],
+      },
+      {
+        day: 4,
+        title: 'Monkey Island – Lunch – Return to Iquitos',
+        activities: [
+          'At 9:00am departure to Monkey Island (approx. 35 min by boat).',
+          'Local guide will share information about 16 monkey species in their natural habitat. Tour of approx. 1 hour 20 minutes.',
+          'Return to the lodge for lunch.',
+          'Pack luggage and return to Iquitos city.',
+          'Tour ends at Bella Vista Nanay port. The guide will advise on transport to the airport or hotel.',
+        ],
+      },
+    ],
+  },
+  'tour-mono-ardilla-3d-2n': {
+    name: 'Tour Mono Ardilla',
+    subtitle: '3 Days / 2 Nights',
+    description: 'A 3-day adventure through the Amazon jungle. Wildlife, native communities, botanical walk, artisanal fishing and the most beautiful Amazonian landscapes.',
+    includes: ['Breakfast, Lunch and Dinner', 'Jungle lodge accommodation', 'River and land transport', 'Professional local guide'],
+    notIncludes: ['Soft drinks or other beverages', 'Flashlight', 'Rain poncho', 'Bug repellent'],
+    toBring: ['Mosquito repellent', 'Rain poncho', 'Flashlight', 'Long shirt and pants', 'Sunscreen'],
+    days: [
+      {
+        day: 1,
+        title: 'Arrival – Lodge – Amazonian Sunset',
+        activities: [
+          'Pickup from airport or hotel and transfer to Bella Vista Nanay port.',
+          'The guide will provide an overview of the Nanay and Amazon rivers, and typical Amazonian cuisine.',
+          'Boat departure at 9:30am.',
+          'Visit to Pilpintu Wasi animal rescue center (approx. 20 min): anteater, jaguar, monkeys, otters and river wolf.',
+          'Visit to Kukama Uka native community: traditional dances, beverages such as pururuka and masato, and invitation to dance to the rhythm of their flutes and drums.',
+          'Approx. 49-minute navigation to the lodge. Welcome and room check-in with all basic amenities.',
+          'The guide will explain meal schedules and the itinerary activities.',
+          'At 5:30pm, departure to Santa Maria de Fatima community port to watch the Amazonian sunset and dolphins.',
+        ],
+      },
+      {
+        day: 2,
+        title: 'Viewpoint – Lupuna Tree – Fundo Don Pedrito – Botanical Walk',
+        activities: [
+          'At 9:30am departure to the Tourist Viewpoint in Independencia native community (approx. 25 min).',
+          'Enjoy the landscape towards the Amazon River and relax in hammocks (25 min).',
+          'Visit to the giant Lupuna (Ceiba) tree: photo session and guide explanation about its origins.',
+          'Visit to Fundo Don Pedrito: sighting of the paiche (largest freshwater fish), caimans, anaconda and turtles.',
+          'Return to the lodge. Lunch at 1:30pm with typical Amazonian dishes: paiche and doncella.',
+          'At 3:30pm start of the botanical walk in the Amazon jungle: medicinal plants, primates and butterflies.',
+        ],
+      },
+      {
+        day: 3,
+        title: 'Artisanal Fishing – Lunch – Return to Iquitos',
+        activities: [
+          'At 9:30am departure for artisanal and sport fishing.',
+          'The guide will explain traditional artisanal fishing techniques.',
+          'Enjoy the Amazonian scenery. Option to purchase soft drinks, beers and Amazonian ceviche.',
+          'Return to the lodge for lunch.',
+          'Pack luggage and return to Iquitos city.',
+          'Tour ends at Bella Vista Nanay port. The guide will advise on transport to the airport or hotel.',
+        ],
+      },
+    ],
+  },
+  'fullday-amazonas': {
+    name: 'Full Day Amazonas',
+    subtitle: '1 Full Day',
+    description: 'A full day navigating the great Amazon River. Tourist viewpoint, Fundo Don Pedrito, Yahuas community, Monkey Island and a typical Amazonian lunch.',
+    includes: ['River and land transport', 'Professional local guide', 'Lunch at our lodge'],
+    notIncludes: [],
+    toBring: ['Sunscreen', 'Bug repellent', 'Rain poncho', 'Long shirt and pants'],
+    days: [
+      {
+        day: 1,
+        title: 'Complete Tour of the Amazon River',
+        activities: [
+          'First stop at Bella Vista Nanay port. The guide will provide an overview of the Nanay and Amazon rivers and typical Amazonian cuisine.',
+          'Boat departure at 9:30am.',
+          'Approx. 35-minute navigation to the Tourist Viewpoint in Independencia native community: beautiful Amazon River landscape and rest in hammocks (20 min).',
+          'Visit to the giant Lupuna (Ceiba) tree: photo session.',
+          'Visit to Fundo Don Pedrito: sighting of the paiche (largest freshwater fish), caimans, anaconda and turtles.',
+          'Visit to Yahuas native community: culture and traditions, blowpipe (pukuna) demonstration with visitor participation. Tasting of traditional beverages such as masato and pururuka.',
+          'Visit to Monkey Island: 16 monkey species (woolly monkey, spider monkey, howler monkey) with personalized guide. Tour of approx. 1 hour.',
+          'Return to the lodge for lunch with typical Amazonian dishes.',
+          'Navigation back to Iquitos (approx. 1 hour). With luck, pink dolphin sighting.',
+          'Tour ends with transfer to the city center.',
+        ],
+      },
+    ],
+  },
+  'fullday-nanay': {
+    name: 'Full Day Nanay',
+    subtitle: '1 Full Day',
+    description: 'Complete exploration of the Nanay River. Canopy, piranha aquarium, insectarium, artisanal sugar mill and the beautiful Amazonian sunset.',
+    includes: ['River and land transport', 'Professional local guide'],
+    notIncludes: [],
+    toBring: ['Sunscreen', 'Bug repellent', 'Rain poncho', 'Long shirt and pants'],
+    days: [
+      {
+        day: 1,
+        title: 'Complete Tour of the Nanay River',
+        activities: [
+          'First stop at Bella Vista Nanay port. The guide will provide an overview of the Nanay and Amazon rivers and typical Amazonian cuisine.',
+          'Boat departure at 9:30am.',
+          'Visit to Pilpintu Wasi (approx. 20 min by boat): anteater, jaguar, monkeys, otters and river wolf.',
+          'Visit to Kukama Uka native community: traditional dances, beverages such as pururuka and masato. Invitation to dance to the rhythm of their flutes and drums.',
+          'Approx. 35-minute navigation to the Treetop Suspension Bridge: extreme sports, canopy and Tibetan bridge.',
+          'Visit to the Piranha Aquarium: various Amazonian fish species such as paiche, electric fish, leaffish and others.',
+          'Visit to the Insectarium: poison dart frog, stick insect, bullet ant and other Amazonian insect species.',
+          'Visit to the Artisanal Sugar Mill: tasting of medicinal and exotic beverages such as 7 roots, cumaceba, chuchuwasha and others.',
+          'Watch the Amazonian sunset by the Nanay River.',
+          'Tour ends with transfer to the city center.',
+        ],
+      },
+    ],
+  },
+}
+
+export function getLocalizedTour(tour, lang) {
+  if (!tour || lang !== 'en') return tour
+  const en = toursEn[tour.id]
+  if (!en) return tour
+  return {
+    ...tour,
+    name: en.name ?? tour.name,
+    subtitle: en.subtitle ?? tour.subtitle,
+    description: en.description ?? tour.description,
+    includes: en.includes ?? tour.includes,
+    notIncludes: en.notIncludes ?? tour.notIncludes,
+    toBring: en.toBring ?? tour.toBring,
+    days: en.days ?? tour.days,
+  }
+}
