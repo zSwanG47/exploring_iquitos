@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useLang } from '../context/LanguageContext'
+import { useNavigationGuard } from '../context/NavigationGuardContext'
 
 const LANGUAGES = [
   { code: 'es', label: 'Español', flag: '/images/espana.png' },
@@ -99,6 +100,7 @@ export default function Navbar() {
   const [offcanvasOpen, setOffcanvasOpen] = useState(false)
   const navigate = useNavigate()
   const { t } = useLang()
+  const { safeNavigate } = useNavigationGuard()
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 60)
@@ -109,7 +111,7 @@ export default function Navbar() {
   const handleNavClick = (e, to) => {
     e.preventDefault()
     setOffcanvasOpen(false)
-    navigate(to)
+    safeNavigate(to)
   }
 
   const links = [

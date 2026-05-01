@@ -64,6 +64,7 @@ export const translations = {
       quickLinks: 'Links Rapidos',
       ourTours: 'Nuestros Tours',
       rights: 'Todos los derechos reservados.',
+      paymentMethods: 'Métodos de pago',
     },
     tourDetail: {
       back: 'Volver',
@@ -188,6 +189,7 @@ export const translations = {
       quickLinks: 'Quick Links',
       ourTours: 'Our Tours',
       rights: 'All rights reserved.',
+      paymentMethods: 'Payment Methods',
     },
     tourDetail: {
       back: 'Back',

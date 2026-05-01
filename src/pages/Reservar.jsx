@@ -1,10 +1,11 @@
-import { useState, useEffect, useCallback } from 'react'
+import { useState, useEffect } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import { PayPalButtons } from '@paypal/react-paypal-js'
 import { getTourById, getLocalizedTour } from '../data/toursData'
 import { supabase } from '../supabaseClient'
 import { useLang } from '../context/LanguageContext'
 import { useTourPrices } from '../context/TourPricesContext'
+import { useNavigationGuard } from '../context/NavigationGuardContext'
 
 export default function Reservar() {
   const { id } = useParams()
@@ -13,6 +14,7 @@ export default function Reservar() {
   const tr = t.reservar
   const prices = useTourPrices()
   const tour = getLocalizedTour(getTourById(id), lang)
+  const { setDirty, safeNavigate } = useNavigationGuard()
 
   const [form, setForm] = useState({
     nombres: '',
@@ -38,9 +40,6 @@ export default function Reservar() {
   const [reservaToken, setReservaToken] = useState(null)
   const [error, setError] = useState('')
   const [payError, setPayError] = useState('')
-  const [dirty, setDirty] = useState(false)
-  const [showConfirm, setShowConfirm] = useState(false)
-  const [pendingDest, setPendingDest] = useState(null)
 
   useEffect(() => {
     window.scrollTo(0, 0)
@@ -72,20 +71,6 @@ export default function Reservar() {
     const { name, value } = e.target
     setDirty(true)
     setForm((prev) => ({ ...prev, [name]: value }))
-  }
-
-  const safeNavigate = useCallback((dest) => {
-    if (dirty && step === 'form') {
-      setPendingDest(dest)
-      setShowConfirm(true)
-    } else {
-      navigate(dest)
-    }
-  }, [dirty, step, navigate])
-
-  const confirmLeave = () => {
-    setShowConfirm(false)
-    navigate(pendingDest)
   }
 
   const handleSubmit = async (e) => {
@@ -214,51 +199,6 @@ export default function Reservar() {
 
   return (
     <>
-      {/* ── Confirm leave modal ── */}
-      {showConfirm && (
-        <>
-          <div
-            className="modal-backdrop fade show"
-            style={{ zIndex: 1040 }}
-            onClick={() => setShowConfirm(false)}
-          />
-          <div
-            className="modal fade show d-block"
-            style={{ zIndex: 1050 }}
-            role="dialog"
-          >
-            <div className="modal-dialog modal-dialog-centered">
-              <div className="modal-content border-0 shadow">
-                <div className="modal-header border-0 pb-0">
-                  <h5 className="modal-title fw-bold">
-                    <i className="bi bi-exclamation-triangle-fill text-warning me-2" />
-                    {tr.confirmTitle}
-                  </h5>
-                </div>
-                <div className="modal-body text-muted">
-                  {tr.confirmBody}
-                </div>
-                <div className="modal-footer border-0 pt-0 gap-2">
-                  <button
-                    className="btn btn-success fw-semibold"
-                    onClick={() => setShowConfirm(false)}
-                  >
-                    <i className="bi bi-pencil-fill me-2" />
-                    {tr.confirmCancel}
-                  </button>
-                  <button
-                    className="btn btn-outline-danger"
-                    onClick={confirmLeave}
-                  >
-                    {tr.confirmYes}
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </>
-      )}
-
       {/* Hero */}
       <div
         style={{

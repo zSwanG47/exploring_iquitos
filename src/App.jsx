@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import { PayPalScriptProvider } from '@paypal/react-paypal-js'
 import { LanguageProvider } from './context/LanguageContext'
 import { TourPricesProvider } from './context/TourPricesContext'
+import { NavigationGuardProvider } from './context/NavigationGuardContext'
 import Navbar from './components/Navbar'
 import Hero from './components/Hero'
 import About from './components/About'
@@ -41,6 +42,7 @@ function App() {
     <TourPricesProvider>
     <LanguageProvider>
       <BrowserRouter>
+      <NavigationGuardProvider>
       <Navbar />
       <Routes>
         <Route path="/" element={<HomePage />} />
@@ -54,6 +56,7 @@ function App() {
       </Routes>
       <Footer />
       <WhatsAppFloat />
+      </NavigationGuardProvider>
       </BrowserRouter>
     </LanguageProvider>
     </TourPricesProvider>
