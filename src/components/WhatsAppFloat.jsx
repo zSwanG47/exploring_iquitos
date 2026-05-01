@@ -1,5 +1,5 @@
 // Actualiza este numero con el WhatsApp real de la empresa
-const WA_NUMBER = '51999999999'
+const WA_NUMBER = '51931483071'
 const WA_MSG = encodeURIComponent(
   'Hola, me gustaria informarme sobre los tours disponibles en Exploring Iquitos.'
 )
