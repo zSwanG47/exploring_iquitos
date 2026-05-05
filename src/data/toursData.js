@@ -77,7 +77,7 @@ export const tours = [
         day: 5,
         title: 'Trapiche – Comunidad Yahuas – Retorno a Iquitos',
         activities: [
-          'A las 9:00am visita a la casa del Trapiche Artesanal: extraccion del jugo de cana de azucar y degustacion de bebidas exoticas y medicinales de cortesia.',
+          'A las 9:00am visita a la casa del Trapiche Artesanal: extraccion del jugo de caña de azucar y degustacion de bebidas exoticas y medicinales de cortesia.',
           'Visita a la comunidad nativa Yahuas (Champas): cultura, tradiciones y demostracion de la cerbatana (pukuna), arma de caza tradicional. Los visitantes podran participar.',
           'Retorno al lodge para el almuerzo.',
           'Empaque de equipaje y retorno a la ciudad de Iquitos.',
@@ -261,7 +261,7 @@ export const tours = [
           'Visita al arbol gigante conocido como la Lupuna o Ceiba: sesion de fotos con el imponente arbol.',
           'Visita al Fundo Don Pedrito: avistamiento del paiche (el pez mas grande de agua dulce), caimanes, anaconda y tortugas.',
           'Visita a la comunidad nativa Yahuas: cultura y tradiciones, demostracion de la cerbatana (pukuna) con participacion del visitante. Degustacion de bebidas tradicionales como el masato y la pururuka.',
-          'Visita a la Isla de los Monos: 16 especies de monos (mono choro, mono arana, mono aullador) con guia personalizado. Recorrido de aprox. 1 hora.',
+          'Visita a la Isla de los Monos: 16 especies de monos (mono choro, mono araña, mono aullador) con guia personalizado. Recorrido de aprox. 1 hora.',
           'Retorno al lodge para el almuerzo con platos tipicos de la amazonia peruana.',
           'Navegacion de regreso a Iquitos (aprox. 1 hora). Con suerte, avistamiento del delfin rosado.',
           'Finalizacion del tour con traslado al centro de la ciudad.',
