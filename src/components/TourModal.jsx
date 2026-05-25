@@ -4,7 +4,7 @@ import { useTourPrices } from '../context/TourPricesContext'
 import { useLang } from '../context/LanguageContext'
 import { getLocalizedTour } from '../data/toursData'
 
-const WA_NUMBER = '51999999999'
+const WA_NUMBER = '51925998156'
 
 export default function TourModal({ tour, onClose }) {
   const modalRef = useRef(null)

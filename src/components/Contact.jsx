@@ -70,7 +70,7 @@ export default function Contact() {
 
             {[
               { icon: 'bi-geo-alt-fill',  label: tc.labelLocation, value: 'Iquitos, Loreto, Peru' },
-              { icon: 'bi-whatsapp',      label: tc.labelWhatsApp, value: '+51 931 483 071' },
+              { icon: 'bi-whatsapp',      label: tc.labelWhatsApp, value: '+51 925 998 156' },
               { icon: 'bi-envelope-fill', label: tc.labelEmail,    value: 'exploringiquitos@gmail.com' },
               { icon: 'bi-clock-fill',    label: tc.labelSchedule, value: tc.scheduleValue },
             ].map(({ icon, label, value }) => (
