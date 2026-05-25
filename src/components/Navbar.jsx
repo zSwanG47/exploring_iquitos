@@ -245,9 +245,9 @@ export default function Navbar() {
             style={{ borderTop: '1px solid rgba(255,255,255,0.1)', marginTop: '16px' }}
           >
             {[
-              { icon: 'bi-facebook',  href: '#', label: 'Facebook' },
-              { icon: 'bi-instagram', href: '#', label: 'Instagram' },
-              { icon: 'bi-tiktok',    href: '#', label: 'TikTok' },
+              { icon: 'bi-facebook',  href: 'https://www.facebook.com/share/18jENmCyF2/', label: 'Facebook' },
+              { icon: 'bi-instagram', href: 'https://www.instagram.com/exploringiquitos?utm_source=qr&igsh=MTVvOTN0MTNkOGUyeg==', label: 'Instagram' },
+              { icon: 'bi-tiktok',    href: 'https://www.tiktok.com/@exploringiquitos?_r=1&_t=ZS-964zTmmYiJD', label: 'TikTok' },
               { icon: 'bi-youtube',   href: '#', label: 'YouTube' },
             ].map(({ icon, href, label }) => (
               <a

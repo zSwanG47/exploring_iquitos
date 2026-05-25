@@ -3,9 +3,9 @@ import { useLang } from '../context/LanguageContext'
 import { useNavigationGuard } from '../context/NavigationGuardContext'
 
 const socialLinks = [
-  { icon: 'bi-facebook',  href: '#', label: 'Facebook' },
-  { icon: 'bi-instagram', href: '#', label: 'Instagram' },
-  { icon: 'bi-tiktok',    href: '#', label: 'TikTok' },
+  { icon: 'bi-facebook',  href: 'https://www.facebook.com/share/18jENmCyF2/', label: 'Facebook' },
+  { icon: 'bi-instagram', href: 'https://www.instagram.com/exploringiquitos?utm_source=qr&igsh=MTVvOTN0MTNkOGUyeg==', label: 'Instagram' },
+  { icon: 'bi-tiktok',    href: 'https://www.tiktok.com/@exploringiquitos?_r=1&_t=ZS-964zTmmYiJD', label: 'TikTok' },
   { icon: 'bi-youtube',   href: '#', label: 'YouTube' },
 ]
 
