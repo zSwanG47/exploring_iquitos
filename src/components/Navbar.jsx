@@ -239,6 +239,10 @@ export default function Navbar() {
             ))}
           </ul>
 
+          <div className="px-4 py-3" style={{ borderTop: '1px solid rgba(255,255,255,0.1)' }}>
+            <LangSwitcher inOffcanvas />
+          </div>
+
           {/* Social icons at bottom */}
           <div
             className="d-flex gap-3 px-4 py-4"
@@ -279,15 +283,7 @@ function FloatingLangSwitcher() {
   const current = LANGUAGES.find((l) => l.code === lang)
 
   return (
-    <div
-      className="d-lg-none"
-      style={{
-        position: 'fixed',
-        bottom: '100px',
-        right: '28px',
-        zIndex: 9998,
-      }}
-    >
+    <div className="floating-lang-switcher d-lg-none">
       {/* Dropdown (opens upward) */}
       {open && (
         <>

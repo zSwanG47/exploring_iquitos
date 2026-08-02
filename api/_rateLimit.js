@@ -3,7 +3,7 @@ const ipMap = new Map()
 const MAX_REQUESTS = 15
 const WINDOW_MS = 60 * 1000 // 1 minuto
 
-export function checkRateLimit(ip) {
+export function checkRateLimit(ip, maxRequests = MAX_REQUESTS) {
   const now = Date.now()
   const entry = ipMap.get(ip) || { count: 0, resetAt: now + WINDOW_MS }
 
@@ -24,8 +24,8 @@ export function checkRateLimit(ip) {
   }
 
   return {
-    allowed: entry.count <= MAX_REQUESTS,
-    remaining: Math.max(0, MAX_REQUESTS - entry.count),
+    allowed: entry.count <= maxRequests,
+    remaining: Math.max(0, maxRequests - entry.count),
     resetAt: entry.resetAt,
   }
 }

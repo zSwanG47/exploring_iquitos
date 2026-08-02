@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { supabase } from '../supabaseClient'
 import { useLang } from '../context/LanguageContext'
+import AppNotice from './AppNotice'
 
 const initialForm = { nombre: '', email: '', telefono: '', mensaje: '' }
 
@@ -100,18 +101,10 @@ export default function Contact() {
           <div className="col-lg-7">
             <div className="bg-white p-4 p-lg-5 rounded-4 shadow-sm">
               {status === 'success' && (
-                <div className="alert alert-success d-flex align-items-center gap-2">
-                  <i className="bi bi-check-circle-fill fs-5" />
-                  <span>
-                    {tc.successMsg}
-                  </span>
-                </div>
+                <AppNotice variant="success">{tc.successMsg}</AppNotice>
               )}
               {status === 'error' && (
-                <div className="alert alert-danger d-flex align-items-center gap-2">
-                  <i className="bi bi-exclamation-circle-fill fs-5" />
-                  <span>{tc.errorMsg}</span>
-                </div>
+                <AppNotice variant="error">{tc.errorMsg}</AppNotice>
               )}
 
               <form onSubmit={handleSubmit} noValidate>

@@ -1,0 +1,289 @@
+/* ============================================================
+   TOUR CARDS — Exploring Iquitos
+   ============================================================ */
+
+.tours-v2 {
+  --teal-deep:      #062a1f;
+  --teal-mid:       #0c4a36;
+  --teal-soft:      #134e3a;
+  --green-bright:   #16a34a;
+  --green-vivid:    #22c55e;
+  --green-glow:     #4ade80;
+  --river-mist:     #f4f9f6;
+  background-color: var(--river-mist);
+  background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%230c4a36' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  padding: 80px 0;
+}
+
+.tours-v2__header {
+  text-align: center;
+  margin-bottom: 48px;
+}
+
+.tours-v2__eyebrow {
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--green-bright);
+  margin-bottom: 10px;
+}
+
+.tours-v2__title {
+  font-size: clamp(1.8rem, 4vw, 2.4rem);
+  font-weight: 800;
+  color: var(--teal-deep);
+  margin-bottom: 12px;
+}
+
+.tours-v2__title::after {
+  content: '';
+  display: block;
+  width: 70px;
+  height: 3px;
+  background: linear-gradient(90deg, var(--green-vivid), transparent);
+  margin: 14px auto 0;
+  border-radius: 2px;
+}
+
+.tours-v2__subtitle {
+  color: #5a7268;
+  font-size: 1.05rem;
+  max-width: 520px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+/* ── Card ── */
+.tour-card-v2 {
+  display: flex;
+  flex-direction: column;
+  background: #fff;
+  border-radius: 20px;
+  overflow: hidden;
+  border: 1px solid rgba(12, 74, 54, 0.1);
+  box-shadow: 0 4px 24px rgba(6, 42, 31, 0.08);
+  transition: transform 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease;
+  height: 100%;
+}
+
+.tour-card-v2:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 20px 48px rgba(6, 42, 31, 0.14);
+  border-color: rgba(34, 197, 94, 0.45);
+}
+
+.tour-card-v2__media {
+  position: relative;
+  height: 220px;
+  overflow: hidden;
+}
+
+.tour-card-v2__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s ease;
+}
+
+.tour-card-v2:hover .tour-card-v2__media img {
+  transform: scale(1.06);
+}
+
+.tour-card-v2__media-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(6, 42, 31, 0.1) 0%,
+    rgba(6, 42, 31, 0.55) 100%
+  );
+}
+
+.tour-card-v2__duration {
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  border-radius: 100px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  background: linear-gradient(135deg, var(--green-bright), var(--green-vivid));
+  color: #fff;
+  box-shadow: 0 4px 14px rgba(34, 197, 94, 0.4);
+  z-index: 1;
+}
+
+.tour-card-v2__name-overlay {
+  position: absolute;
+  bottom: 14px;
+  left: 16px;
+  right: 16px;
+  z-index: 1;
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: #fff;
+  line-height: 1.2;
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.4);
+}
+
+.tour-card-v2__body {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  padding: 22px 22px 20px;
+}
+
+.tour-card-v2__desc {
+  font-size: 0.9rem;
+  line-height: 1.65;
+  color: #4a5f55;
+  margin: 0 0 16px;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.tour-card-v2__includes {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 20px;
+  flex: 1;
+}
+
+.tour-card-v2__includes li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.82rem;
+  color: var(--teal-mid);
+  padding: 5px 0;
+}
+
+.tour-card-v2__includes li i {
+  color: var(--green-vivid);
+  font-size: 0.9rem;
+  flex-shrink: 0;
+}
+
+.tour-card-v2__includes-more {
+  color: var(--green-bright) !important;
+  font-weight: 600;
+  font-size: 0.78rem !important;
+  padding-top: 2px !important;
+}
+
+.tour-card-v2__footer {
+  border-top: 1px dashed rgba(12, 74, 54, 0.15);
+  padding-top: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.tour-card-v2__price-row {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+}
+
+.tour-card-v2__price {
+  font-size: 1.75rem;
+  font-weight: 800;
+  color: var(--green-bright);
+  line-height: 1;
+}
+
+.tour-card-v2__price-unit {
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: #7a8f84;
+}
+
+.tour-card-v2__actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.tour-card-v2__btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 11px 12px;
+  border-radius: 10px;
+  font-size: 0.88rem;
+  font-weight: 700;
+  text-decoration: none;
+  transition: transform 0.2s, box-shadow 0.2s, background 0.2s;
+  border: none;
+  cursor: pointer;
+  text-align: center;
+}
+
+.tour-card-v2__btn--outline {
+  background: transparent;
+  border: 1.5px solid var(--teal-mid);
+  color: var(--teal-mid);
+}
+
+.tour-card-v2__btn--outline:hover {
+  background: var(--river-mist);
+  color: var(--teal-deep);
+  transform: translateY(-1px);
+}
+
+.tour-card-v2__btn--primary {
+  background: linear-gradient(135deg, var(--green-bright), var(--green-vivid));
+  color: #fff;
+  box-shadow: 0 4px 16px rgba(34, 197, 94, 0.35);
+}
+
+.tour-card-v2__btn--primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 22px rgba(34, 197, 94, 0.45);
+  color: #fff;
+}
+
+.tour-card-v2__btn--disabled {
+  opacity: 0.45;
+  pointer-events: none;
+}
+
+/* ── Responsive ── */
+
+@media (max-width: 767.98px) {
+  .tours-v2 {
+    padding: 56px 0;
+  }
+
+  .tours-v2__header {
+    margin-bottom: 32px;
+  }
+
+  .tour-card-v2__media {
+    height: 200px;
+  }
+
+  .tour-card-v2__body {
+    padding: 18px;
+  }
+
+  .tour-card-v2__name-overlay {
+    font-size: 1.1rem;
+  }
+
+  .tour-card-v2__price {
+    font-size: 1.5rem;
+  }
+
+  .tour-card-v2__actions {
+    grid-template-columns: 1fr;
+  }
+}

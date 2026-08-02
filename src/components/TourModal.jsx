@@ -1,6 +1,7 @@
 import { useEffect, useRef } from 'react'
 import { Modal } from 'bootstrap'
-import { useTourPrices } from '../context/TourPricesContext'
+import { useTourPrice } from '../context/TourPricesContext'
+import TourPriceDisplay from './TourPriceDisplay'
 import { useLang } from '../context/LanguageContext'
 import { getLocalizedTour } from '../data/toursData'
 
@@ -9,10 +10,10 @@ const WA_NUMBER = '51925998156'
 export default function TourModal({ tour, onClose }) {
   const modalRef = useRef(null)
   const bsModalRef = useRef(null)
-  const prices = useTourPrices()
+  const { price, loading: priceLoading } = useTourPrice(tour?.id)
+
   const { lang } = useLang()
   const localTour = getLocalizedTour(tour, lang)
-  const price = tour ? (prices[tour.id] ?? tour.price) : 0
 
   // Inicializar instancia Bootstrap Modal una sola vez
   useEffect(() => {
@@ -37,7 +38,9 @@ export default function TourModal({ tour, onClose }) {
 
   const msg = localTour
     ? encodeURIComponent(
-        `Hola, me interesa el ${localTour.name} (${localTour.subtitle}) por $${price} USD. Quisiera mas informacion.`
+        price != null
+          ? `Hola, me interesa el ${localTour.name} (${localTour.subtitle}) por $${price} USD. Quisiera mas informacion.`
+          : `Hola, me interesa el ${localTour.name} (${localTour.subtitle}). Quisiera mas informacion.`
       )
     : ''
   const waLink = `https://wa.me/${WA_NUMBER}?text=${msg}`
@@ -62,7 +65,10 @@ export default function TourModal({ tour, onClose }) {
               {localTour && (
                 <small className="text-white-50">
                   <i className="bi bi-clock me-1" />
-                  {localTour.subtitle} &mdash; ${price} USD / persona
+                  {localTour.subtitle}
+                  {!priceLoading && price != null && (
+                    <> &mdash; ${price} USD / persona</>
+                  )}
                 </small>
               )}
             </div>

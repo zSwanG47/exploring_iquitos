@@ -2,76 +2,99 @@ import { Link } from 'react-router-dom'
 import { tours, getLocalizedTour } from '../data/toursData'
 import { useLang } from '../context/LanguageContext'
 import { useTourPrices } from '../context/TourPricesContext'
+import TourPriceDisplay from './TourPriceDisplay'
+import '../styles/tours-cards.css'
 
-function TourCard({ tour, t, price, lang }) {
-  tour = getLocalizedTour(tour, lang)
+function TourCard({ tour, t, price, priceLoading, lang }) {
+  const localized = getLocalizedTour(tour, lang)
+  const visibleIncludes = localized.includes.slice(0, 3)
+  const extraCount = localized.includes.length - visibleIncludes.length
+  const canBook = !priceLoading && price != null
+
   return (
-    <div className="col-md-6 col-xl-4 d-flex">
-      <div className="tour-card card w-100">
-        <img src={tour.image} alt={tour.name} loading="lazy" />
-        <div className="card-body d-flex flex-column p-4">
-          <h5 className="card-title fw-bold mb-1">{tour.name}</h5>
-          <p className="text-muted small mb-2">
-            <i className="bi bi-clock me-1" />
-            {tour.subtitle}
-          </p>
-          <p className="card-text text-muted small mb-3 flex-grow-1">{tour.description}</p>
+    <article className="tour-card-v2 w-100">
+      <div className="tour-card-v2__media">
+        <img src={localized.image} alt={localized.name} loading="lazy" />
+        <div className="tour-card-v2__media-overlay" />
+        <span className="tour-card-v2__duration">
+          <i className="bi bi-clock" />
+          {localized.subtitle}
+        </span>
+        <h3 className="tour-card-v2__name-overlay">{localized.name}</h3>
+      </div>
 
-          <div className="mb-3">
-            {tour.includes.map((item) => (
-              <span
-                key={item}
-                className="badge rounded-pill me-1 mb-1"
-                style={{ backgroundColor: '#d4edda', color: '#145228' }}
-              >
-                <i className="bi bi-check2 me-1" />
-                {item}
-              </span>
-            ))}
+      <div className="tour-card-v2__body">
+        <p className="tour-card-v2__desc">{localized.description}</p>
+
+        <ul className="tour-card-v2__includes">
+          {visibleIncludes.map((item) => (
+            <li key={item}>
+              <i className="bi bi-check-circle-fill" />
+              {item}
+            </li>
+          ))}
+          {extraCount > 0 && (
+            <li className="tour-card-v2__includes-more">
+              +{extraCount} {lang === 'en' ? 'more included' : 'mas incluido'}
+            </li>
+          )}
+        </ul>
+
+        <div className="tour-card-v2__footer">
+          <div className="tour-card-v2__price-row">
+            <TourPriceDisplay price={price} loading={priceLoading} className="tour-card-v2__price" />
+            {!priceLoading && price != null && (
+              <span className="tour-card-v2__price-unit">{t.tours.perPerson}</span>
+            )}
           </div>
 
-          <div className="mb-3">
-            <span className="tour-price">${price ?? tour.price}</span>
-            <span className="text-muted small ms-1">{t.tours.perPerson}</span>
-          </div>
-
-          <div className="d-flex gap-2">
+          <div className="tour-card-v2__actions">
             <Link
-              to={`/tour/${tour.id}`}
-              className="btn btn-outline-success fw-semibold flex-fill"
+              to={`/tour/${localized.id}`}
+              className="tour-card-v2__btn tour-card-v2__btn--outline"
             >
-              <i className="bi bi-file-text me-1" />
+              <i className="bi bi-compass" />
               {t.tours.btnDetails}
             </Link>
             <Link
-              to={`/reservar/${tour.id}`}
-              className="btn btn-success fw-semibold flex-fill"
+              to={`/reservar/${localized.id}`}
+              className={`tour-card-v2__btn tour-card-v2__btn--primary${canBook ? '' : ' tour-card-v2__btn--disabled'}`}
+              aria-disabled={!canBook}
             >
+              <i className="bi bi-calendar-check" />
               {t.tours.btnReserve}
             </Link>
           </div>
         </div>
       </div>
-    </div>
+    </article>
   )
 }
 
 export default function Tours() {
   const { t, lang } = useLang()
-  const prices = useTourPrices()
+  const { prices, loading } = useTourPrices()
+
   return (
-    <section id="tours" className="py-5 bg-white">
+    <section id="tours" className="tours-v2">
       <div className="container">
-        <div className="text-center mb-5">
-          <h2 className="section-title">{t.tours.sectionTitle}</h2>
-          <div className="section-divider" />
-          <p className="text-muted fs-5 mt-4">
-            {t.tours.subtitle}
-          </p>
-        </div>
+        <header className="tours-v2__header">
+          <p className="tours-v2__eyebrow">Exploring Iquitos</p>
+          <h2 className="tours-v2__title">{t.tours.sectionTitle}</h2>
+          <p className="tours-v2__subtitle">{t.tours.subtitle}</p>
+        </header>
+
         <div className="row g-4 justify-content-center">
           {tours.map((tour) => (
-            <TourCard key={tour.id} tour={tour} t={t} price={prices[tour.id] ?? tour.price} lang={lang} />
+            <div key={tour.id} className="col-md-6 col-xl-4 d-flex">
+              <TourCard
+                tour={tour}
+                t={t}
+                price={prices[tour.id]}
+                priceLoading={loading}
+                lang={lang}
+              />
+            </div>
           ))}
         </div>
       </div>

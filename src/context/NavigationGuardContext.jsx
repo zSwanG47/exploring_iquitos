@@ -1,6 +1,7 @@
 import { createContext, useContext, useState, useCallback } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useLang } from './LanguageContext'
+import ConfirmDialog from '../components/ConfirmDialog'
 
 const NavigationGuardContext = createContext()
 
@@ -37,37 +38,18 @@ export function NavigationGuardProvider({ children }) {
     <NavigationGuardContext.Provider value={{ dirty, setDirty, safeNavigate }}>
       {children}
 
-      {showConfirm && (
-        <>
-          <div
-            className="modal-backdrop fade show"
-            style={{ zIndex: 1040 }}
-            onClick={cancelLeave}
-          />
-          <div className="modal fade show d-block" style={{ zIndex: 1050 }} role="dialog">
-            <div className="modal-dialog modal-dialog-centered">
-              <div className="modal-content border-0 shadow">
-                <div className="modal-header border-0 pb-0">
-                  <h5 className="modal-title fw-bold">
-                    <i className="bi bi-exclamation-triangle-fill text-warning me-2" />
-                    {tr.confirmTitle}
-                  </h5>
-                </div>
-                <div className="modal-body text-muted">{tr.confirmBody}</div>
-                <div className="modal-footer border-0 pt-0 gap-2">
-                  <button className="btn btn-success fw-semibold" onClick={cancelLeave}>
-                    <i className="bi bi-pencil-fill me-2" />
-                    {tr.confirmCancel}
-                  </button>
-                  <button className="btn btn-outline-danger" onClick={confirmLeave}>
-                    {tr.confirmYes}
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </>
-      )}
+      <ConfirmDialog
+        open={showConfirm}
+        title={tr.confirmTitle}
+        confirmLabel={tr.confirmYes}
+        cancelLabel={tr.confirmCancel}
+        cancelIcon="bi-pencil-fill"
+        onConfirm={confirmLeave}
+        onCancel={cancelLeave}
+        variant="warning"
+      >
+        {tr.confirmBody}
+      </ConfirmDialog>
     </NavigationGuardContext.Provider>
   )
 }

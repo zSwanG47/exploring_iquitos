@@ -3,7 +3,6 @@ export const tours = [
     id: 'tour-amazonas-5d-4n',
     name: 'Tour Amazonas',
     subtitle: '5 Dias / 4 Noches',
-    price: 600,
     image: '/images/tour_amazonas.png',
     description:
       'La experiencia mas completa de la Amazonia. Explora la selva profunda, avista fauna silvestre, visita comunidades nativas y navega por los majestuosos rios amazonicos.',
@@ -25,6 +24,14 @@ export const tours = [
       'Linterna',
       'Camisa manga larga',
       'Pantalon largo',
+    ],
+    highlights: [
+      { icon: 'bi-tree', label: 'Lodge en la selva' },
+      { icon: 'bi-water', label: 'Navegacion por el Amazonas' },
+      { icon: 'bi-emoji-smile', label: 'Isla de los Monos' },
+      { icon: 'bi-butterfly', label: 'Mariposario' },
+      { icon: 'bi-people', label: 'Comunidades nativas' },
+      { icon: 'bi-moon-stars', label: 'Atardecer con delfines' },
     ],
     days: [
       {
@@ -90,7 +97,6 @@ export const tours = [
     id: 'tour-isla-bonita-4d-3n',
     name: 'Tour Isla Bonita',
     subtitle: '4 Dias / 3 Noches',
-    price: 400,
     image: '/images/tour_isla_bonita.png',
     description:
       'Explora la hermosa Isla Bonita en el Amazonas. Comunidades nativas, fauna silvestre, caminata botanica, pesca artesanal e Isla de los Monos en un itinerario de 4 dias.',
@@ -111,6 +117,14 @@ export const tours = [
       'Poncho para la lluvia',
       'Linterna',
       'Camisa y pantalon largo',
+    ],
+    highlights: [
+      { icon: 'bi-tree', label: 'Lodge en la selva' },
+      { icon: 'bi-people', label: 'Comunidades nativas' },
+      { icon: 'bi-binoculars', label: 'Avistamiento de fauna' },
+      { icon: 'bi-flower1', label: 'Caminata botanica' },
+      { icon: 'bi-emoji-smile', label: 'Isla de los Monos' },
+      { icon: 'bi-moon-stars', label: 'Atardecer amazonico' },
     ],
     days: [
       {
@@ -166,7 +180,6 @@ export const tours = [
     id: 'tour-mono-ardilla-3d-2n',
     name: 'Tour Mono Ardilla',
     subtitle: '3 Dias / 2 Noches',
-    price: 300,
     image: '/images/tour_mono_ardilla.png',
     description:
       'Aventura de 3 dias por la selva amazonica. Fauna silvestre, comunidades nativas, caminata botanica, pesca artesanal y los paisajes mas hermosos del Amazonas.',
@@ -188,6 +201,14 @@ export const tours = [
       'Linterna',
       'Camisa y pantalon largo',
       'Bloqueador solar',
+    ],
+    highlights: [
+      { icon: 'bi-tree', label: 'Lodge en la selva' },
+      { icon: 'bi-tree-fill', label: 'Arbol Lupuna' },
+      { icon: 'bi-flower1', label: 'Caminata botanica' },
+      { icon: 'bi-water', label: 'Pesca artesanal' },
+      { icon: 'bi-people', label: 'Comunidades nativas' },
+      { icon: 'bi-moon-stars', label: 'Atardecer con delfines' },
     ],
     days: [
       {
@@ -234,7 +255,6 @@ export const tours = [
     id: 'fullday-amazonas',
     name: 'Full Day Amazonas',
     subtitle: '1 Dia completo',
-    price: 100,
     image: '/images/tour_fullday_amazonas.png',
     description:
       'Un dia completo navegando por el gran rio Amazonas. Mirador turistico, Fundo Don Pedrito, comunidad Yahuas, Isla de los Monos y almuerzo tipico amazonico.',
@@ -249,6 +269,14 @@ export const tours = [
       'Repelente',
       'Poncho para la lluvia',
       'Polo y pantalon largo',
+    ],
+    highlights: [
+      { icon: 'bi-water', label: 'Rio Amazonas' },
+      { icon: 'bi-tree-fill', label: 'Arbol Lupuna' },
+      { icon: 'bi-people', label: 'Comunidad Yahuas' },
+      { icon: 'bi-emoji-smile', label: 'Isla de los Monos' },
+      { icon: 'bi-cup-hot', label: 'Almuerzo tipico' },
+      { icon: 'bi-droplet', label: 'Delfin rosado' },
     ],
     days: [
       {
@@ -273,7 +301,6 @@ export const tours = [
     id: 'fullday-nanay',
     name: 'Full Day Nanay',
     subtitle: '1 Dia completo',
-    price: 100,
     image: '/images/tour_fullday_nanay.png',
     description:
       'Exploracion completa del rio Nanay navigando por sus aguas. Canopy, acuario de piranas, insectario, trapiche artesanal y el hermoso atardecer amazonico.',
@@ -287,6 +314,14 @@ export const tours = [
       'Repelente',
       'Poncho para lluvia',
       'Polo y pantalon largo',
+    ],
+    highlights: [
+      { icon: 'bi-water', label: 'Rio Nanay' },
+      { icon: 'bi-arrows-collapse', label: 'Canopy y puente tibetano' },
+      { icon: 'bi-lightning', label: 'Acuario de piranhas' },
+      { icon: 'bi-bug', label: 'Insectario' },
+      { icon: 'bi-cup-straw', label: 'Trapiche artesanal' },
+      { icon: 'bi-moon-stars', label: 'Atardecer amazonico' },
     ],
     days: [
       {
@@ -322,6 +357,14 @@ const toursEn = {
     includes: ['Breakfast, Lunch and Dinner', 'Jungle lodge accommodation', 'River and land transport', 'Professional local guide'],
     notIncludes: ['Soft drinks or other beverages', 'Flashlight', 'Rain poncho', 'Bug repellent'],
     toBring: ['Mosquito repellent', 'Rain poncho', 'Flashlight', 'Long-sleeved shirt', 'Long pants'],
+    highlights: [
+      { icon: 'bi-tree', label: 'Jungle lodge' },
+      { icon: 'bi-water', label: 'Amazon River navigation' },
+      { icon: 'bi-emoji-smile', label: 'Monkey Island' },
+      { icon: 'bi-butterfly', label: 'Butterfly garden' },
+      { icon: 'bi-people', label: 'Native communities' },
+      { icon: 'bi-moon-stars', label: 'Sunset with dolphins' },
+    ],
     days: [
       {
         day: 1,
@@ -389,6 +432,14 @@ const toursEn = {
     includes: ['Breakfast, Lunch and Dinner', 'Jungle lodge accommodation', 'River and land transport', 'Professional local guide'],
     notIncludes: ['Soft drinks or other beverages', 'Flashlight', 'Rain poncho', 'Bug repellent'],
     toBring: ['Mosquito repellent', 'Rain poncho', 'Flashlight', 'Long shirt and pants'],
+    highlights: [
+      { icon: 'bi-tree', label: 'Jungle lodge' },
+      { icon: 'bi-people', label: 'Native communities' },
+      { icon: 'bi-binoculars', label: 'Wildlife spotting' },
+      { icon: 'bi-flower1', label: 'Botanical walk' },
+      { icon: 'bi-emoji-smile', label: 'Monkey Island' },
+      { icon: 'bi-moon-stars', label: 'Amazonian sunset' },
+    ],
     days: [
       {
         day: 1,
@@ -446,6 +497,14 @@ const toursEn = {
     includes: ['Breakfast, Lunch and Dinner', 'Jungle lodge accommodation', 'River and land transport', 'Professional local guide'],
     notIncludes: ['Soft drinks or other beverages', 'Flashlight', 'Rain poncho', 'Bug repellent'],
     toBring: ['Mosquito repellent', 'Rain poncho', 'Flashlight', 'Long shirt and pants', 'Sunscreen'],
+    highlights: [
+      { icon: 'bi-tree', label: 'Jungle lodge' },
+      { icon: 'bi-tree-fill', label: 'Lupuna tree' },
+      { icon: 'bi-flower1', label: 'Botanical walk' },
+      { icon: 'bi-water', label: 'Artisanal fishing' },
+      { icon: 'bi-people', label: 'Native communities' },
+      { icon: 'bi-moon-stars', label: 'Sunset with dolphins' },
+    ],
     days: [
       {
         day: 1,
@@ -494,6 +553,14 @@ const toursEn = {
     includes: ['River and land transport', 'Professional local guide', 'Lunch at our lodge'],
     notIncludes: [],
     toBring: ['Sunscreen', 'Bug repellent', 'Rain poncho', 'Long shirt and pants'],
+    highlights: [
+      { icon: 'bi-water', label: 'Amazon River' },
+      { icon: 'bi-tree-fill', label: 'Lupuna tree' },
+      { icon: 'bi-people', label: 'Yahuas community' },
+      { icon: 'bi-emoji-smile', label: 'Monkey Island' },
+      { icon: 'bi-cup-hot', label: 'Typical lunch' },
+      { icon: 'bi-droplet', label: 'Pink dolphin' },
+    ],
     days: [
       {
         day: 1,
@@ -520,6 +587,14 @@ const toursEn = {
     includes: ['River and land transport', 'Professional local guide'],
     notIncludes: [],
     toBring: ['Sunscreen', 'Bug repellent', 'Rain poncho', 'Long shirt and pants'],
+    highlights: [
+      { icon: 'bi-water', label: 'Nanay River' },
+      { icon: 'bi-arrows-collapse', label: 'Canopy and Tibetan bridge' },
+      { icon: 'bi-lightning', label: 'Piranha aquarium' },
+      { icon: 'bi-bug', label: 'Insectarium' },
+      { icon: 'bi-cup-straw', label: 'Artisanal sugar mill' },
+      { icon: 'bi-moon-stars', label: 'Amazonian sunset' },
+    ],
     days: [
       {
         day: 1,
@@ -553,6 +628,7 @@ export function getLocalizedTour(tour, lang) {
     includes: en.includes ?? tour.includes,
     notIncludes: en.notIncludes ?? tour.notIncludes,
     toBring: en.toBring ?? tour.toBring,
+    highlights: en.highlights ?? tour.highlights,
     days: en.days ?? tour.days,
   }
 }

@@ -1,33 +1,30 @@
 import { createContext, useContext, useEffect, useState } from 'react'
 import { supabase } from '../supabaseClient'
-import { tours as localTours } from '../data/toursData'
 
-const TourPricesContext = createContext({})
+const TourPricesContext = createContext({ prices: {}, loading: true })
 
 export function TourPricesProvider({ children }) {
-  // Inicializar con precios locales como fallback
-  const [prices, setPrices] = useState(() => {
-    const map = {}
-    localTours.forEach((t) => { map[t.id] = t.price })
-    return map
-  })
+  const [prices, setPrices] = useState({})
+  const [loading, setLoading] = useState(true)
 
   useEffect(() => {
     supabase
       .from('tours')
       .select('id, precio')
       .then(({ data }) => {
-        if (!data) return
-        setPrices((prev) => {
-          const next = { ...prev }
-          data.forEach((row) => { next[row.id] = row.precio })
-          return next
-        })
+        if (data) {
+          const map = {}
+          data.forEach((row) => {
+            if (row.precio != null) map[row.id] = Number(row.precio)
+          })
+          setPrices(map)
+        }
       })
+      .finally(() => setLoading(false))
   }, [])
 
   return (
-    <TourPricesContext.Provider value={prices}>
+    <TourPricesContext.Provider value={{ prices, loading }}>
       {children}
     </TourPricesContext.Provider>
   )
@@ -35,4 +32,9 @@ export function TourPricesProvider({ children }) {
 
 export function useTourPrices() {
   return useContext(TourPricesContext)
+}
+
+export function useTourPrice(tourId) {
+  const { prices, loading } = useTourPrices()
+  return { price: prices[tourId] ?? null, loading }
 }

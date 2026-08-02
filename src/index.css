@@ -215,7 +215,14 @@ section {
   transform: translateY(-4px);
 }
 
-/* === WhatsApp flotante === */
+/* === Flotantes móvil (idioma + WhatsApp) === */
+.floating-lang-switcher {
+  position: fixed;
+  bottom: 100px;
+  right: 28px;
+  z-index: 9998;
+}
+
 .whatsapp-float {
   position: fixed;
   bottom: 28px;
@@ -241,4 +248,39 @@ section {
 .whatsapp-float i {
   font-size: 1.9rem;
   color: #fff;
+}
+
+@media (max-width: 767.98px) {
+  .floating-lang-switcher {
+    bottom: 88px;
+    right: 16px;
+  }
+
+  .whatsapp-float {
+    width: 52px;
+    height: 52px;
+    bottom: 20px;
+    right: 16px;
+  }
+
+  .whatsapp-float i {
+    font-size: 1.6rem;
+  }
+}
+
+/* Detalle / reserva: apilar encima de la barra fija inferior */
+@media (max-width: 991.98px) {
+  body:has(.tour-detail) .whatsapp-float,
+  body:has(.reservar-page) .whatsapp-float {
+    display: flex;
+    bottom: max(80px, calc(68px + env(safe-area-inset-bottom)));
+    width: 48px;
+    height: 48px;
+  }
+
+  body:has(.tour-detail) .floating-lang-switcher,
+  body:has(.reservar-page) .floating-lang-switcher {
+    bottom: max(144px, calc(132px + env(safe-area-inset-bottom)));
+    right: 16px;
+  }
 }

@@ -2,17 +2,19 @@ import { useState, useEffect } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import { PayPalButtons } from '@paypal/react-paypal-js'
 import { getTourById, getLocalizedTour } from '../data/toursData'
-import { supabase } from '../supabaseClient'
 import { useLang } from '../context/LanguageContext'
-import { useTourPrices } from '../context/TourPricesContext'
+import { useTourPrice } from '../context/TourPricesContext'
+import TourPriceDisplay from '../components/TourPriceDisplay'
+import AppNotice from '../components/AppNotice'
 import { useNavigationGuard } from '../context/NavigationGuardContext'
+import '../styles/reservar.css'
 
 export default function Reservar() {
   const { id } = useParams()
   const navigate = useNavigate()
   const { t, lang } = useLang()
   const tr = t.reservar
-  const prices = useTourPrices()
+  const { price, loading: priceLoading } = useTourPrice(id)
   const tour = getLocalizedTour(getTourById(id), lang)
   const { dirty, setDirty, safeNavigate } = useNavigationGuard()
 
@@ -27,7 +29,6 @@ export default function Reservar() {
     descripcion: '',
   })
 
-  // Mínimo: mañana en hora local (se puede reservar hoy para mañana)
   const tomorrow = new Date()
   tomorrow.setDate(tomorrow.getDate() + 1)
   const minDateStr = [
@@ -35,37 +36,53 @@ export default function Reservar() {
     String(tomorrow.getMonth() + 1).padStart(2, '0'),
     String(tomorrow.getDate()).padStart(2, '0'),
   ].join('-')
+
   const [loading, setLoading] = useState(false)
-  const [step, setStep] = useState('form') // 'form' | 'payment' | 'success'
+  const [step, setStep] = useState('form')
   const [reservaToken, setReservaToken] = useState(null)
+  const [serverTotal, setServerTotal] = useState(null)
   const [error, setError] = useState('')
   const [payError, setPayError] = useState('')
+  const [payLoading, setPayLoading] = useState(false)
 
   useEffect(() => {
     window.scrollTo(0, 0)
-  }, [])
+  }, [id, step])
 
-  // Warn on browser back / tab close
+  useEffect(() => {
+    if (tour) {
+      document.title = `${tr.title} ${tour.name} | Exploring Iquitos`
+    }
+    return () => {
+      document.title = 'Exploring Iquitos | Tours en la Amazonia Peruana'
+    }
+  }, [tour, tr.title])
+
   useEffect(() => {
     if (!dirty) return
-    const onBeforeUnload = (e) => { e.preventDefault(); e.returnValue = '' }
+    const onBeforeUnload = (e) => {
+      e.preventDefault()
+      e.returnValue = ''
+    }
     window.addEventListener('beforeunload', onBeforeUnload)
     return () => window.removeEventListener('beforeunload', onBeforeUnload)
   }, [dirty])
 
   if (!tour) {
     return (
-      <div className="container py-5 text-center" style={{ minHeight: '60vh' }}>
-        <h2>{tr.notFound}</h2>
-        <button className="btn btn-success mt-3" onClick={() => navigate('/')}>
-          {tr.backHome}
-        </button>
+      <div className="reservar-page">
+        <div className="container py-5 text-center" style={{ minHeight: '60vh' }}>
+          <h2>{tr.notFound}</h2>
+          <button type="button" className="reservar-page__btn-pay mt-3" onClick={() => navigate('/')}>
+            {tr.backHome}
+          </button>
+        </div>
       </div>
     )
   }
 
-  const price = tour ? (prices[tour.id] ?? tour.price) : 0
-  const total = price * Number(form.personas)
+  const total = serverTotal ?? (price != null ? price * Number(form.personas) : 0)
+  const canReserve = !priceLoading && price != null
 
   const handleChange = (e) => {
     const { name, value } = e.target
@@ -78,28 +95,28 @@ export default function Reservar() {
     setLoading(true)
     setError('')
     try {
-      const refToken = crypto.randomUUID()
-      const { error: dbError } = await supabase.from('reservas').insert([
-        {
+      const res = await fetch('/api/reservas', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
           tour_id: tour.id,
-          tour_nombre: tour.name,
           nombres: form.nombres,
           apellidos: form.apellidos,
           telefono: form.telefono,
           documento: form.documento,
           correo: form.correo,
           personas: Number(form.personas),
-          fecha_tour: form.fecha,
+          fecha: form.fecha,
           descripcion: form.descripcion,
-          total_usd: total,
-          estado: 'pendiente',
-          ref_token: refToken,
-        },
-      ])
-      if (dbError) throw dbError
-      setReservaToken(refToken)
+        }),
+      })
+      const data = await res.json()
+      if (!res.ok) throw new Error(data.error || 'create failed')
+
+      setReservaToken(data.ref_token)
+      setServerTotal(data.total_usd)
+      setDirty(false)
       setStep('payment')
-      window.scrollTo(0, 0)
     } catch {
       setError(tr.errorMsg)
     } finally {
@@ -109,87 +126,88 @@ export default function Reservar() {
 
   if (step === 'success') {
     return (
-      <div
-        className="container py-5 text-center"
-        style={{
-          minHeight: '70vh',
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          justifyContent: 'center',
-        }}
-      >
-        <i className="bi bi-check-circle-fill text-success" style={{ fontSize: '5rem' }} />
-        <h2 className="fw-bold mt-4 mb-2">{tr.successTitle}</h2>
-        <p className="text-muted mb-1 fs-5">
-          {tr.successMsg(form.nombres)}
-        </p>
-        <p className="text-muted mb-4">
-          {tr.successSub}
-        </p>
-        <button className="btn btn-success px-5 py-2 fw-semibold" onClick={() => navigate('/')}>
-          {tr.backHome}
-        </button>
+      <div className="reservar-page">
+        <div className="reservar-page__success">
+          <i className="bi bi-check-circle-fill reservar-page__success-icon" />
+          <h2>{tr.successTitle}</h2>
+          <p className="reservar-page__success-msg">{tr.successMsg(form.nombres)}</p>
+          <p className="reservar-page__success-sub">{tr.successSub}</p>
+          <button type="button" className="reservar-page__btn-pay" onClick={() => navigate('/')}>
+            {tr.backHome}
+          </button>
+        </div>
       </div>
     )
   }
 
   if (step === 'payment') {
     return (
-      <div className="container py-5 mt-5" style={{ minHeight: '70vh' }}>
-        <div className="row justify-content-center">
-          <div className="col-lg-5 col-md-7">
-            <div className="card border-0 shadow-sm p-4">
-              <h4 className="fw-bold mb-1" style={{ color: 'var(--green-primary)' }}>
-                <i className="bi bi-paypal me-2" />
-                {tr.payTitle}
-              </h4>
-              <p className="text-muted small mb-4">{tr.paySubtitle}</p>
+      <div className="reservar-page">
+        <div className="container reservar-page__body">
+          <div className="row justify-content-center">
+            <div className="col-lg-5 col-md-7">
+              <div className="reservar-page__payment-card">
+                <h2 className="reservar-page__form-title">
+                  <i className="bi bi-paypal" />
+                  {tr.payTitle}
+                </h2>
+                <p className="reservar-page__payment-sub">{tr.paySubtitle}</p>
 
-              <div className="d-flex justify-content-between align-items-center bg-light rounded p-3 mb-4">
-                <span className="fw-semibold text-muted">{tr.payAmount}</span>
-                <span className="fw-bold fs-4" style={{ color: 'var(--green-primary)' }}>
-                  ${total.toFixed(2)}{' '}
-                  <span className="fs-6 fw-normal text-muted">USD</span>
-                </span>
-              </div>
-
-              {payError && (
-                <div className="alert alert-danger d-flex align-items-center gap-2 mb-3">
-                  <i className="bi bi-exclamation-triangle-fill flex-shrink-0" />
-                  {payError}
+                <div className="reservar-page__payment-amount">
+                  <span>{tr.payAmount}</span>
+                  <span className="reservar-page__payment-total">
+                    ${total.toFixed(2)} <small>USD</small>
+                  </span>
                 </div>
-              )}
 
-              <PayPalButtons
-                style={{ layout: 'vertical', color: 'gold', shape: 'rect', label: 'pay' }}
-                createOrder={(data, actions) =>
-                  actions.order.create({
-                    purchase_units: [{
-                      amount: { value: total.toFixed(2) },
-                      description: `${tour.name} × ${form.personas} persona(s)`,
-                    }],
-                  })
-                }
-                onApprove={async (data, actions) => {
-                  await actions.order.capture()
-                  await supabase.from('reservas').update({
-                    estado: 'pagado',
-                    paypal_order_id: data.orderID,
-                  }).eq('ref_token', reservaToken)
-                  setStep('success')
-                  window.scrollTo(0, 0)
-                }}
-                onError={() => setPayError(tr.payError)}
-              />
+                {payError && (
+                  <AppNotice variant="error">{payError}</AppNotice>
+                )}
 
-              <button
-                className="btn btn-link text-muted mt-2 text-decoration-none ps-0"
-                onClick={() => setStep('form')}
-              >
-                <i className="bi bi-arrow-left me-1" />
-                {tr.payCancel}
-              </button>
+                <PayPalButtons
+                  style={{ layout: 'vertical', color: 'blue', shape: 'rect', label: 'pay' }}
+                  disabled={payLoading}
+                  createOrder={(_data, actions) =>
+                    actions.order.create({
+                      purchase_units: [{
+                        amount: { value: total.toFixed(2) },
+                        description: `${tour.name} × ${form.personas} persona(s)`,
+                      }],
+                    })
+                  }
+                  onApprove={async (data) => {
+                    setPayLoading(true)
+                    setPayError('')
+                    try {
+                      const res = await fetch('/api/reservas/confirm', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({
+                          ref_token: reservaToken,
+                          orderID: data.orderID,
+                        }),
+                      })
+                      const json = await res.json()
+                      if (!res.ok) throw new Error(json.error || 'confirm failed')
+                      setStep('success')
+                    } catch {
+                      setPayError(tr.payError)
+                    } finally {
+                      setPayLoading(false)
+                    }
+                  }}
+                  onError={() => setPayError(tr.payError)}
+                />
+
+                <button
+                  type="button"
+                  className="reservar-page__pay-cancel"
+                  onClick={() => setStep('form')}
+                >
+                  <i className="bi bi-arrow-left" />
+                  {tr.payCancel}
+                </button>
+              </div>
             </div>
           </div>
         </div>
@@ -198,131 +216,132 @@ export default function Reservar() {
   }
 
   return (
-    <>
-      {/* Hero */}
-      <div
-        style={{
-          background: `linear-gradient(rgba(0,0,0,0.55),rgba(0,0,0,0.55)), url('${tour.image}') center/cover no-repeat`,
-          minHeight: '200px',
-          display: 'flex',
-          alignItems: 'flex-end',
-        }}
-      >
-        <div className="container pb-4 pt-5 mt-4 text-white">
-          <h1 className="fw-bold mb-0">{tr.title} {tour.name}</h1>
+    <div className="reservar-page">
+      <header className="reservar-page__hero">
+        <div
+          className="reservar-page__hero-bg"
+          style={{ backgroundImage: `url('${tour.image}')` }}
+        />
+        <div className="reservar-page__hero-overlay" />
+        <div className="container reservar-page__hero-content">
+          <p className="reservar-page__hero-label">Exploring Iquitos</p>
+          <h1 className="reservar-page__hero-title">
+            {tr.title} {tour.name}
+          </h1>
+          <div className="reservar-page__hero-meta">
+            <span className="reservar-page__pill reservar-page__pill--duration">
+              <i className="bi bi-clock" />
+              {tour.subtitle}
+            </span>
+            <span className="reservar-page__pill reservar-page__pill--price">
+              <i className="bi bi-tag-fill" />
+              <TourPriceDisplay price={price} loading={priceLoading} />
+              {!priceLoading && price != null && ' USD'}
+            </span>
+          </div>
         </div>
-      </div>
+      </header>
 
-      <div className="container py-5">
-        {/* Back link — above the form */}
+      <div className="container reservar-page__body">
         <button
-          className="btn btn-link text-decoration-none ps-0 mb-3"
-          style={{ color: 'var(--green-primary)', fontWeight: 600 }}
+          type="button"
+          className="reservar-page__back-link"
           onClick={() => safeNavigate(`/tour/${tour.id}`)}
         >
-          <i className="bi bi-arrow-left me-1" />
+          <i className="bi bi-arrow-left" />
           {tr.backToDetails}
         </button>
 
-        <div className="row g-5 align-items-start">
-          {/* ── Left: Form ── */}
+        <div className="row g-4 g-lg-5 align-items-start">
           <div className="col-lg-7">
-            <div className="card border-0 shadow-sm p-4">
-              <h4 className="fw-bold mb-4" style={{ color: 'var(--green-primary)' }}>
-                <i className="bi bi-person-lines-fill me-2" />
+            <div className="reservar-page__form-card">
+              <h2 className="reservar-page__form-title">
+                <i className="bi bi-person-lines-fill" />
                 {tr.dataTitle}
-              </h4>
+              </h2>
 
               {error && (
-                <div className="alert alert-danger d-flex align-items-center gap-2 mb-3">
-                  <i className="bi bi-exclamation-triangle-fill flex-shrink-0" />
-                  {error}
-                </div>
+                <AppNotice variant="error">{error}</AppNotice>
               )}
 
-              <form onSubmit={handleSubmit}>
+              <form id="reservar-form" onSubmit={handleSubmit}>
                 <div className="row g-3">
                   <div className="col-sm-6">
-                    <label className="form-label fw-semibold">
-                      {tr.nombres} <span className="text-danger">*</span>
+                    <label className="reservar-page__label">
+                      {tr.nombres} <span className="req">*</span>
                     </label>
                     <input
                       type="text"
-                      className="form-control"
+                      className="reservar-page__input"
                       name="nombres"
                       value={form.nombres}
                       onChange={handleChange}
                       required
-                      placeholder="Ej: Juan Carlos"
+                      placeholder={tr.nombresPh}
                     />
                   </div>
-
                   <div className="col-sm-6">
-                    <label className="form-label fw-semibold">
-                      {tr.apellidos} <span className="text-danger">*</span>
+                    <label className="reservar-page__label">
+                      {tr.apellidos} <span className="req">*</span>
                     </label>
                     <input
                       type="text"
-                      className="form-control"
+                      className="reservar-page__input"
                       name="apellidos"
                       value={form.apellidos}
                       onChange={handleChange}
                       required
-                      placeholder="Ej: García López"
+                      placeholder={tr.apellidosPh}
                     />
                   </div>
-
                   <div className="col-sm-6">
-                    <label className="form-label fw-semibold">
-                      {tr.telefono} <span className="text-danger">*</span>
+                    <label className="reservar-page__label">
+                      {tr.telefono} <span className="req">*</span>
                     </label>
                     <input
                       type="tel"
-                      className="form-control"
+                      className="reservar-page__input"
                       name="telefono"
                       value={form.telefono}
                       onChange={handleChange}
                       required
-                      placeholder="+51 999 999 999"
+                      placeholder={tr.telefonoPh}
                     />
                   </div>
-
                   <div className="col-sm-6">
-                    <label className="form-label fw-semibold">
-                      {tr.documento} <span className="text-danger">*</span>
+                    <label className="reservar-page__label">
+                      {tr.documento} <span className="req">*</span>
                     </label>
                     <input
                       type="text"
-                      className="form-control"
+                      className="reservar-page__input"
                       name="documento"
                       value={form.documento}
                       onChange={handleChange}
                       required
-                      placeholder="Ej: 12345678"
+                      placeholder={tr.documentoPh}
                     />
                   </div>
-
                   <div className="col-12">
-                    <label className="form-label fw-semibold">
-                      {tr.correo} <span className="text-danger">*</span>
+                    <label className="reservar-page__label">
+                      {tr.correo} <span className="req">*</span>
                     </label>
                     <input
                       type="email"
-                      className="form-control"
+                      className="reservar-page__input"
                       name="correo"
                       value={form.correo}
                       onChange={handleChange}
                       required
-                      placeholder="correo@ejemplo.com"
+                      placeholder={tr.correoPh}
                     />
                   </div>
-
                   <div className="col-sm-5">
-                    <label className="form-label fw-semibold">
-                      {tr.personas} <span className="text-danger">*</span>
+                    <label className="reservar-page__label">
+                      {tr.personas} <span className="req">*</span>
                     </label>
                     <select
-                      className="form-select"
+                      className="reservar-page__select"
                       name="personas"
                       value={form.personas}
                       onChange={handleChange}
@@ -335,32 +354,28 @@ export default function Reservar() {
                       ))}
                     </select>
                   </div>
-
                   <div className="col-sm-7">
-                    <label className="form-label fw-semibold">
-                      {tr.fecha} <span className="text-danger">*</span>
+                    <label className="reservar-page__label">
+                      {tr.fecha} <span className="req">*</span>
                     </label>
                     <input
                       type="date"
-                      className="form-control"
+                      className="reservar-page__input"
                       name="fecha"
                       value={form.fecha}
                       onChange={handleChange}
                       required
                       min={minDateStr}
                     />
-                    <div className="form-text text-muted">
-                      <i className="bi bi-info-circle me-1" />
+                    <div className="reservar-page__hint">
+                      <i className="bi bi-info-circle" />
                       {tr.fechaHint}
                     </div>
                   </div>
-
                   <div className="col-12">
-                    <label className="form-label fw-semibold">
-                      {tr.descripcion}
-                    </label>
+                    <label className="reservar-page__label">{tr.descripcion}</label>
                     <textarea
-                      className="form-control"
+                      className="reservar-page__textarea"
                       name="descripcion"
                       value={form.descripcion}
                       onChange={handleChange}
@@ -370,104 +385,122 @@ export default function Reservar() {
                   </div>
                 </div>
 
-                {/* Submit */}
-                <div className="mt-4 pt-3 border-top">
-                  <div className="d-flex align-items-center justify-content-between flex-wrap gap-3">
-                    <div>
-                      <div className="text-muted small mb-1">{tr.totalLabel}</div>
-                      <div className="fw-bold fs-2 lh-1" style={{ color: 'var(--green-primary)' }}>
-                        ${total.toLocaleString('en-US')}
-                        <span className="fs-6 fw-normal text-muted ms-2">USD</span>
-                      </div>
-                      <div className="text-muted small mt-1">
-                        ${price} × {tr.personaOpt(Number(form.personas))}
-                      </div>
-                    </div>
-                    <button
-                      type="submit"
-                      className="btn fw-bold px-5 py-3 fs-5"
-                      style={{
-                        backgroundColor: 'var(--green-primary)',
-                        color: '#fff',
-                        border: 'none',
-                        borderRadius: '8px',
-                      }}
-                      disabled={loading}
-                    >
-                      {loading ? (
+                <div className="reservar-page__footer">
+                  <div>
+                    <div className="reservar-page__total-label">{tr.totalLabel}</div>
+                    <div className="reservar-page__total-amount">
+                      {priceLoading ? (
+                        <span className="spinner-border spinner-border-sm" role="status" />
+                      ) : price != null ? (
                         <>
-                          <span className="spinner-border spinner-border-sm me-2" role="status" />
-                          {tr.sending}
+                          ${total.toLocaleString('en-US')}
+                          <span className="unit">USD</span>
                         </>
                       ) : (
-                        <>
-                          <i className="bi bi-credit-card me-2" />
-                          {tr.pay}
-                        </>
+                        <span className="unit">—</span>
                       )}
-                    </button>
+                    </div>
+                    {price != null && (
+                      <div className="reservar-page__total-breakdown">
+                        ${price} × {tr.personaOpt(Number(form.personas))}
+                      </div>
+                    )}
                   </div>
+                  <button
+                    type="submit"
+                    className="reservar-page__btn-pay"
+                    disabled={loading || !canReserve}
+                  >
+                    {loading ? (
+                      <>
+                        <span className="spinner-border spinner-border-sm" role="status" />
+                        {tr.sending}
+                      </>
+                    ) : (
+                      <>
+                        <i className="bi bi-credit-card" />
+                        {tr.pay}
+                      </>
+                    )}
+                  </button>
                 </div>
               </form>
             </div>
           </div>
 
-          {/* ── Right: Tour summary ── */}
           <div className="col-lg-5">
-            <div
-              className="card border-0 shadow-sm"
-              style={{ position: 'sticky', top: '88px' }}
-            >
-              <img
-                src={tour.image}
-                alt={tour.name}
-                className="card-img-top"
-                style={{
-                  height: '190px',
-                  objectFit: 'cover',
-                  borderRadius: '0.375rem 0.375rem 0 0',
-                }}
-              />
-              <div className="card-body p-4">
-                <h5 className="fw-bold mb-1">{tour.name}</h5>
-                <p className="text-muted small mb-3">
-                  <i className="bi bi-clock me-1" />
-                  {tour.subtitle}
-                </p>
+            <aside className="reservar-page__aside">
+              <div className="reservar-page__summary">
+                <img
+                  src={tour.image}
+                  alt={tour.name}
+                  className="reservar-page__summary-img"
+                />
+                <div className="reservar-page__summary-body">
+                  <h3 className="reservar-page__summary-name">{tour.name}</h3>
+                  <p className="reservar-page__summary-duration">
+                    <i className="bi bi-clock me-1" />
+                    {tour.subtitle}
+                  </p>
 
-                <div className="d-flex justify-content-between mb-2 small">
-                  <span className="text-muted">{tr.summaryPrice}</span>
-                  <span className="fw-semibold">${tour.price} USD</span>
-                </div>
-                <div className="d-flex justify-content-between mb-2 small">
-                  <span className="text-muted">{tr.summaryPersons}</span>
-                  <span className="fw-semibold">{form.personas}</span>
-                </div>
-                <div className="d-flex justify-content-between py-2 mb-3 border-top border-bottom fw-bold">
-                  <span>{tr.summaryTotal}</span>
-                  <span style={{ color: 'var(--green-primary)' }}>
-                    ${total.toLocaleString('en-US')} USD
-                  </span>
-                </div>
-
-                {tour.includes.length > 0 && (
-                  <div>
-                    <p className="fw-semibold mb-2 small">{tr.includes}</p>
-                    <ul className="list-unstyled mb-0">
-                      {tour.includes.map((item) => (
-                        <li key={item} className="small mb-1 d-flex align-items-center gap-2">
-                          <i className="bi bi-check-circle-fill text-success flex-shrink-0" />
-                          {item}
-                        </li>
-                      ))}
-                    </ul>
+                  <div className="reservar-page__summary-row">
+                    <span>{tr.summaryPrice}</span>
+                    <span>
+                      <TourPriceDisplay price={price} loading={priceLoading} /> USD
+                    </span>
                   </div>
-                )}
+                  <div className="reservar-page__summary-row">
+                    <span>{tr.summaryPersons}</span>
+                    <span>{form.personas}</span>
+                  </div>
+                  <div className="reservar-page__summary-total">
+                    <span>{tr.summaryTotal}</span>
+                    <span>${total.toLocaleString('en-US')} USD</span>
+                  </div>
+
+                  {tour.includes.length > 0 && (
+                    <>
+                      <p className="reservar-page__includes-title">{tr.includes}</p>
+                      <ul className="reservar-page__includes-list">
+                        {tour.includes.map((item) => (
+                          <li key={item}>
+                            <i className="bi bi-check-circle-fill" />
+                            {item}
+                          </li>
+                        ))}
+                      </ul>
+                    </>
+                  )}
+                </div>
               </div>
-            </div>
+            </aside>
           </div>
         </div>
       </div>
-    </>
+
+      <div className="reservar-page__mobile-bar">
+        <div>
+          <div className="reservar-page__mobile-bar-label">{tr.summaryTotal}</div>
+          <div className="reservar-page__mobile-bar-price">
+            {priceLoading ? '…' : price != null ? `$${total.toLocaleString('en-US')}` : '—'}
+          </div>
+        </div>
+        <button
+          type="submit"
+          form="reservar-form"
+          className="reservar-page__btn-pay"
+          disabled={loading || !canReserve}
+        >
+          {loading ? (
+            <span className="spinner-border spinner-border-sm" role="status" />
+          ) : (
+            <>
+              <i className="bi bi-credit-card" />
+              {tr.pay}
+            </>
+          )}
+        </button>
+      </div>
+    </div>
   )
 }
