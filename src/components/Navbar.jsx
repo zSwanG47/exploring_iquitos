@@ -334,15 +334,17 @@ function FloatingLangSwitcher() {
         </>
       )}
 
-      {/* Floating pill button */}
+      {/* Floating pill button — solo bandera */}
       <button
         onClick={() => setOpen((o) => !o)}
-        className="d-flex align-items-center gap-2 border-0"
+        className="d-flex align-items-center justify-content-center border-0"
         style={{
           background: 'var(--green-primary, #1d7a3d)',
           color: '#fff',
-          borderRadius: '50px',
-          padding: '9px 16px',
+          borderRadius: '50%',
+          width: 48,
+          height: 48,
+          padding: 0,
           cursor: 'pointer',
           boxShadow: '0 4px 16px rgba(0,0,0,0.25)',
           outline: 'none',
@@ -355,16 +357,9 @@ function FloatingLangSwitcher() {
         <img
           src={current.flag}
           alt={current.label}
-          width={24}
-          height={16}
-          style={{ objectFit: 'cover', borderRadius: '3px', flexShrink: 0 }}
-        />
-        <span style={{ fontSize: '13px', fontWeight: 700, letterSpacing: '0.05em' }}>
-          {current.code.toUpperCase()}
-        </span>
-        <i
-          className={`bi bi-chevron-${open ? 'down' : 'up'}`}
-          style={{ fontSize: '11px', opacity: 0.85 }}
+          width={28}
+          height={19}
+          style={{ objectFit: 'cover', borderRadius: '4px', flexShrink: 0 }}
         />
       </button>
     </div>
