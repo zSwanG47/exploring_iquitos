@@ -26,12 +26,18 @@ export const tours = [
       'Pantalon largo',
     ],
     highlights: [
-      { icon: 'bi-tree', label: 'Lodge en la selva' },
+      { icon: 'bi-tree', label: 'Eco Lodge' },
       { icon: 'bi-water', label: 'Navegacion por el Amazonas' },
       { icon: 'bi-emoji-smile', label: 'Isla de los Monos' },
       { icon: 'bi-butterfly', label: 'Mariposario' },
       { icon: 'bi-people', label: 'Comunidades nativas' },
-      { icon: 'bi-moon-stars', label: 'Atardecer con delfines' },
+      { icon: 'bi-eye', label: 'Mirador turistico' },
+      { icon: 'bi-feather', label: 'Observacion de aves' },
+      { icon: 'bi-compass', label: 'Exploracion en canoas' },
+      { icon: 'bi-droplet', label: 'Observacion de delfines rosados o grises' },
+      { icon: 'bi-water', label: 'Pesca deportiva de forma tradicional' },
+      { icon: 'bi-binoculars', label: 'Observacion de reptiles y mamiferos' },
+      { icon: 'bi-gem', label: 'Aprendizaje de armas indigenas y artesanias' },
     ],
     days: [
       {
@@ -50,9 +56,9 @@ export const tours = [
       },
       {
         day: 2,
-        title: 'Mirador – Paiche – Pesca Artesanal',
+        title: 'Fundo Don Pedrito – Paiche',
         activities: [
-          'A las 9:30am salida al Mirador Turistico en la comunidad nativa Independencia (aprox. 25 min).',
+          'A las 9:30am salida hacia la comunidad nativa Independencia (aprox. 25 min).',
           'Contemplacion del hermoso paisaje hacia el rio Amazonas y descanso en hamacas.',
           'Visita al Fundo Don Pedrito: avistamiento del paiche (el pez mas grande de agua dulce), caimanes, anaconda y tortugas.',
           'Retorno al lodge para el almuerzo a la 1:30pm con platos tipicos amazonicos como paiche y doncella.',
@@ -60,13 +66,13 @@ export const tours = [
       },
       {
         day: 3,
-        title: 'Caminata Botanica – Pesca Artesanal',
+        title: 'Caminata Botanica – Pesca deportiva',
         activities: [
           'A las 9:30am inicio de la caminata botanica en la selva amazonica.',
           'El guia explicara sobre plantas y arboles medicinales; avistamiento de primates y mariposas.',
           'Retorno al lodge para el almuerzo.',
-          'A las 3:00pm salida para pesca artesanal y deportiva.',
-          'El guia explicara las tecnicas de pesca artesanal y tradicional.',
+          'A las 3:00pm salida para pesca deportiva de forma tradicional.',
+          'El guia explicara las tecnicas de pesca tradicional.',
           'Disfrute del paisaje amazonico. Posibilidad de comprar gaseosas, cervezas y ceviche amazonico.',
         ],
       },
@@ -99,7 +105,7 @@ export const tours = [
     subtitle: '4 Dias / 3 Noches',
     image: '/images/tour_isla_bonita.png',
     description:
-      'Explora la hermosa Isla Bonita en el Amazonas. Comunidades nativas, fauna silvestre, caminata botanica, pesca artesanal e Isla de los Monos en un itinerario de 4 dias.',
+      'Explora la hermosa Isla Bonita en el Amazonas. Comunidades nativas, fauna silvestre, caminata botanica e Isla de los Monos en un itinerario de 4 dias.',
     includes: [
       'Desayuno, Almuerzo y Cena',
       'Alojamiento en la selva',
@@ -119,12 +125,16 @@ export const tours = [
       'Camisa y pantalon largo',
     ],
     highlights: [
-      { icon: 'bi-tree', label: 'Lodge en la selva' },
+      { icon: 'bi-tree', label: 'Eco Lodge' },
       { icon: 'bi-people', label: 'Comunidades nativas' },
-      { icon: 'bi-binoculars', label: 'Avistamiento de fauna' },
       { icon: 'bi-flower1', label: 'Caminata botanica' },
       { icon: 'bi-emoji-smile', label: 'Isla de los Monos' },
-      { icon: 'bi-moon-stars', label: 'Atardecer amazonico' },
+      { icon: 'bi-eye', label: 'Mirador turistico' },
+      { icon: 'bi-feather', label: 'Observacion de aves' },
+      { icon: 'bi-compass', label: 'Exploracion en canoas' },
+      { icon: 'bi-droplet', label: 'Observacion de delfines rosados o grises' },
+      { icon: 'bi-water', label: 'Pesca deportiva de forma tradicional' },
+      { icon: 'bi-binoculars', label: 'Observacion de reptiles y mamiferos' },
     ],
     days: [
       {
@@ -143,9 +153,9 @@ export const tours = [
       },
       {
         day: 2,
-        title: 'Mirador – Fundo Don Pedrito – Almuerzo Tipico',
+        title: 'Fundo Don Pedrito – Almuerzo Tipico',
         activities: [
-          'A las 9:30am salida al Mirador Turistico en la comunidad nativa Independencia (aprox. 25 min).',
+          'A las 9:30am salida hacia la comunidad nativa Independencia (aprox. 25 min).',
           'Contemplacion del paisaje hacia el rio Amazonas y descanso en hamacas (25 min).',
           'Visita al Fundo Don Pedrito: avistamiento del paiche (el pez mas grande de agua dulce), caimanes, anaconda y tortugas.',
           'Retorno al lodge. Almuerzo a la 1:30pm con platos tipicos amazonicos: paiche y doncella.',
@@ -153,12 +163,12 @@ export const tours = [
       },
       {
         day: 3,
-        title: 'Caminata Botanica – Pesca Artesanal',
+        title: 'Caminata Botanica – Pesca deportiva',
         activities: [
           'A las 9:30am inicio de la caminata botanica en la selva amazonica.',
           'El guia explicara sobre plantas y arboles medicinales. Avistamiento de primates y mariposas.',
           'Retorno al lodge para el almuerzo.',
-          'A las 3:00pm salida para pesca artesanal y deportiva.',
+          'A las 3:00pm salida para pesca deportiva de forma tradicional.',
           'El guia explicara las tecnicas de pesca tradicional.',
           'Disfrute del paisaje amazonico. Posibilidad de comprar gaseosas, cervezas y ceviche amazonico.',
         ],
@@ -182,7 +192,7 @@ export const tours = [
     subtitle: '3 Dias / 2 Noches',
     image: '/images/tour_mono_ardilla.png',
     description:
-      'Aventura de 3 dias por la selva amazonica. Fauna silvestre, comunidades nativas, caminata botanica, pesca artesanal y los paisajes mas hermosos del Amazonas.',
+      'Aventura de 3 dias por la selva amazonica. Fauna silvestre, comunidades nativas, caminata botanica y los paisajes mas hermosos del Amazonas.',
     includes: [
       'Desayuno, Almuerzo y Cena',
       'Alojamiento en la selva',
@@ -203,12 +213,16 @@ export const tours = [
       'Bloqueador solar',
     ],
     highlights: [
-      { icon: 'bi-tree', label: 'Lodge en la selva' },
+      { icon: 'bi-tree', label: 'Eco Lodge' },
       { icon: 'bi-tree-fill', label: 'Arbol Lupuna' },
       { icon: 'bi-flower1', label: 'Caminata botanica' },
-      { icon: 'bi-water', label: 'Pesca artesanal' },
       { icon: 'bi-people', label: 'Comunidades nativas' },
-      { icon: 'bi-moon-stars', label: 'Atardecer con delfines' },
+      { icon: 'bi-eye', label: 'Mirador turistico' },
+      { icon: 'bi-feather', label: 'Observacion de aves' },
+      { icon: 'bi-compass', label: 'Exploracion en canoas' },
+      { icon: 'bi-droplet', label: 'Observacion de delfines rosados o grises' },
+      { icon: 'bi-water', label: 'Pesca deportiva de forma tradicional' },
+      { icon: 'bi-binoculars', label: 'Observacion de reptiles y mamiferos' },
     ],
     days: [
       {
@@ -227,9 +241,9 @@ export const tours = [
       },
       {
         day: 2,
-        title: 'Mirador – Lupuna – Fundo Don Pedrito – Caminata Botanica',
+        title: 'Lupuna – Fundo Don Pedrito – Caminata Botanica',
         activities: [
-          'A las 9:30am salida al Mirador Turistico en la comunidad nativa Independencia (aprox. 25 min).',
+          'A las 9:30am salida hacia la comunidad nativa Independencia (aprox. 25 min).',
           'Contemplacion del paisaje hacia el rio Amazonas y descanso en hamacas (25 min).',
           'Visita al arbol gigante conocido como la Lupuna o Ceiba: sesion de fotos y explicacion del guia sobre el origen del arbol.',
           'Visita al Fundo Don Pedrito: avistamiento del paiche (el pez mas grande de agua dulce), caimanes, anaconda y tortugas.',
@@ -239,10 +253,10 @@ export const tours = [
       },
       {
         day: 3,
-        title: 'Pesca Artesanal – Almuerzo – Retorno a Iquitos',
+        title: 'Pesca deportiva – Almuerzo – Retorno a Iquitos',
         activities: [
-          'A las 9:30am salida para pesca artesanal y deportiva.',
-          'El guia explicara las tecnicas de pesca artesanal y tradicional.',
+          'A las 9:30am salida para pesca deportiva de forma tradicional.',
+          'El guia explicara las tecnicas de pesca tradicional.',
           'Disfrute del paisaje amazonico. Posibilidad de comprar gaseosas, cervezas y ceviche amazonico.',
           'Retorno al lodge para el almuerzo.',
           'Empaque de equipaje y retorno a la ciudad de Iquitos.',
@@ -257,7 +271,7 @@ export const tours = [
     subtitle: '1 Dia completo',
     image: '/images/tour_fullday_amazonas.png',
     description:
-      'Un dia completo navegando por el gran rio Amazonas. Mirador turistico, Fundo Don Pedrito, comunidad Yahuas, Isla de los Monos y almuerzo tipico amazonico.',
+      'Un dia completo navegando por el gran rio Amazonas. Fundo Don Pedrito, comunidad Yahuas, Isla de los Monos y almuerzo tipico amazonico.',
     includes: [
       'Traslado fluvial y terrestre',
       'Guia profesional y local',
@@ -276,7 +290,9 @@ export const tours = [
       { icon: 'bi-people', label: 'Comunidad Yahuas' },
       { icon: 'bi-emoji-smile', label: 'Isla de los Monos' },
       { icon: 'bi-cup-hot', label: 'Almuerzo tipico' },
-      { icon: 'bi-droplet', label: 'Delfin rosado' },
+      { icon: 'bi-droplet', label: 'Observacion de delfines rosados o grises' },
+      { icon: 'bi-binoculars', label: 'Observacion de reptiles y mamiferos' },
+      { icon: 'bi-gem', label: 'Aprendizaje de armas indigenas y artesanias' },
     ],
     days: [
       {
@@ -285,7 +301,7 @@ export const tours = [
         activities: [
           'Primera parada en el puerto de Bella Vista Nanay. El guia brindara una explicacion sobre el rio Nanay y el Amazonas, y sobre las comidas tipicas de la amazonia peruana.',
           'Salida en embarcacion a las 9:30am.',
-          'Navegacion aprox. 35 minutos hasta el Mirador Turistico en la comunidad nativa Independencia: hermoso paisaje hacia el rio Amazonas y descanso en hamacas (20 min).',
+          'Navegacion aprox. 35 minutos hasta la comunidad nativa Independencia: hermoso paisaje hacia el rio Amazonas y descanso en hamacas (20 min).',
           'Visita al arbol gigante conocido como la Lupuna o Ceiba: sesion de fotos con el imponente arbol.',
           'Visita al Fundo Don Pedrito: avistamiento del paiche (el pez mas grande de agua dulce), caimanes, anaconda y tortugas.',
           'Visita a la comunidad nativa Yahuas: cultura y tradiciones, demostracion de la cerbatana (pukuna) con participacion del visitante. Degustacion de bebidas tradicionales como el masato y la pururuka.',
@@ -322,6 +338,7 @@ export const tours = [
       { icon: 'bi-bug', label: 'Insectario' },
       { icon: 'bi-cup-straw', label: 'Trapiche artesanal' },
       { icon: 'bi-moon-stars', label: 'Atardecer amazonico' },
+      { icon: 'bi-binoculars', label: 'Observacion de reptiles y mamiferos' },
     ],
     days: [
       {
@@ -358,12 +375,18 @@ const toursEn = {
     notIncludes: ['Soft drinks or other beverages', 'Flashlight', 'Rain poncho', 'Bug repellent'],
     toBring: ['Mosquito repellent', 'Rain poncho', 'Flashlight', 'Long-sleeved shirt', 'Long pants'],
     highlights: [
-      { icon: 'bi-tree', label: 'Jungle lodge' },
+      { icon: 'bi-tree', label: 'Eco Lodge' },
       { icon: 'bi-water', label: 'Amazon River navigation' },
       { icon: 'bi-emoji-smile', label: 'Monkey Island' },
       { icon: 'bi-butterfly', label: 'Butterfly garden' },
       { icon: 'bi-people', label: 'Native communities' },
-      { icon: 'bi-moon-stars', label: 'Sunset with dolphins' },
+      { icon: 'bi-eye', label: 'Tourist viewpoint' },
+      { icon: 'bi-feather', label: 'Bird watching' },
+      { icon: 'bi-compass', label: 'Canoe exploration' },
+      { icon: 'bi-droplet', label: 'Pink or grey dolphin watching' },
+      { icon: 'bi-water', label: 'Traditional sport fishing' },
+      { icon: 'bi-binoculars', label: 'Reptile and mammal watching' },
+      { icon: 'bi-gem', label: 'Indigenous weapons and crafts' },
     ],
     days: [
       {
@@ -382,9 +405,9 @@ const toursEn = {
       },
       {
         day: 2,
-        title: 'Viewpoint – Paiche – Artisanal Fishing',
+        title: 'Fundo Don Pedrito – Paiche',
         activities: [
-          'At 9:30am departure to the Tourist Viewpoint in Independencia native community (approx. 25 min).',
+          'At 9:30am departure to Independencia native community (approx. 25 min).',
           'Enjoy the landscape towards the Amazon River and relax in hammocks.',
           'Visit to Fundo Don Pedrito: sighting of the paiche (the largest freshwater fish), caimans, anaconda and turtles.',
           'Return to the lodge for lunch at 1:30pm with typical Amazonian dishes such as paiche and doncella.',
@@ -392,12 +415,12 @@ const toursEn = {
       },
       {
         day: 3,
-        title: 'Botanical Walk – Artisanal Fishing',
+        title: 'Botanical Walk – Sport Fishing',
         activities: [
           'At 9:30am start of the botanical walk in the Amazon jungle.',
           'The guide will explain medicinal plants and trees; primate and butterfly spotting.',
           'Return to the lodge for lunch.',
-          'At 3:00pm departure for artisanal and sport fishing.',
+          'At 3:00pm departure for traditional sport fishing.',
           'The guide will explain traditional fishing techniques.',
           'Enjoy the Amazonian scenery. Option to purchase soft drinks, beers and Amazonian ceviche.',
         ],
@@ -428,17 +451,21 @@ const toursEn = {
   'tour-isla-bonita-4d-3n': {
     name: 'Tour Isla Bonita',
     subtitle: '4 Days / 3 Nights',
-    description: 'Explore the beautiful Isla Bonita on the Amazon. Native communities, wildlife, botanical walk, artisanal fishing and Monkey Island in a 4-day itinerary.',
+    description: 'Explore the beautiful Isla Bonita on the Amazon. Native communities, wildlife, botanical walk and Monkey Island in a 4-day itinerary.',
     includes: ['Breakfast, Lunch and Dinner', 'Jungle lodge accommodation', 'River and land transport', 'Professional local guide'],
     notIncludes: ['Soft drinks or other beverages', 'Flashlight', 'Rain poncho', 'Bug repellent'],
     toBring: ['Mosquito repellent', 'Rain poncho', 'Flashlight', 'Long shirt and pants'],
     highlights: [
-      { icon: 'bi-tree', label: 'Jungle lodge' },
+      { icon: 'bi-tree', label: 'Eco Lodge' },
       { icon: 'bi-people', label: 'Native communities' },
-      { icon: 'bi-binoculars', label: 'Wildlife spotting' },
       { icon: 'bi-flower1', label: 'Botanical walk' },
       { icon: 'bi-emoji-smile', label: 'Monkey Island' },
-      { icon: 'bi-moon-stars', label: 'Amazonian sunset' },
+      { icon: 'bi-eye', label: 'Tourist viewpoint' },
+      { icon: 'bi-feather', label: 'Bird watching' },
+      { icon: 'bi-compass', label: 'Canoe exploration' },
+      { icon: 'bi-droplet', label: 'Pink or grey dolphin watching' },
+      { icon: 'bi-water', label: 'Traditional sport fishing' },
+      { icon: 'bi-binoculars', label: 'Reptile and mammal watching' },
     ],
     days: [
       {
@@ -457,9 +484,9 @@ const toursEn = {
       },
       {
         day: 2,
-        title: 'Viewpoint – Fundo Don Pedrito – Typical Lunch',
+        title: 'Fundo Don Pedrito – Typical Lunch',
         activities: [
-          'At 9:30am departure to the Tourist Viewpoint in Independencia native community (approx. 25 min).',
+          'At 9:30am departure to Independencia native community (approx. 25 min).',
           'Enjoy the landscape towards the Amazon River and relax in hammocks (25 min).',
           'Visit to Fundo Don Pedrito: sighting of the paiche (largest freshwater fish), caimans, anaconda and turtles.',
           'Return to the lodge. Lunch at 1:30pm with typical Amazonian dishes: paiche and doncella.',
@@ -467,12 +494,12 @@ const toursEn = {
       },
       {
         day: 3,
-        title: 'Botanical Walk – Artisanal Fishing',
+        title: 'Botanical Walk – Sport Fishing',
         activities: [
           'At 9:30am start of the botanical walk in the Amazon jungle.',
           'The guide will explain medicinal plants and trees. Primate and butterfly spotting.',
           'Return to the lodge for lunch.',
-          'At 3:00pm departure for artisanal and sport fishing.',
+          'At 3:00pm departure for traditional sport fishing.',
           'The guide will explain traditional fishing techniques.',
           'Enjoy the Amazonian scenery. Option to purchase soft drinks, beers and Amazonian ceviche.',
         ],
@@ -493,17 +520,21 @@ const toursEn = {
   'tour-mono-ardilla-3d-2n': {
     name: 'Tour Mono Ardilla',
     subtitle: '3 Days / 2 Nights',
-    description: 'A 3-day adventure through the Amazon jungle. Wildlife, native communities, botanical walk, artisanal fishing and the most beautiful Amazonian landscapes.',
+    description: 'A 3-day adventure through the Amazon jungle. Wildlife, native communities, botanical walk and the most beautiful Amazonian landscapes.',
     includes: ['Breakfast, Lunch and Dinner', 'Jungle lodge accommodation', 'River and land transport', 'Professional local guide'],
     notIncludes: ['Soft drinks or other beverages', 'Flashlight', 'Rain poncho', 'Bug repellent'],
     toBring: ['Mosquito repellent', 'Rain poncho', 'Flashlight', 'Long shirt and pants', 'Sunscreen'],
     highlights: [
-      { icon: 'bi-tree', label: 'Jungle lodge' },
+      { icon: 'bi-tree', label: 'Eco Lodge' },
       { icon: 'bi-tree-fill', label: 'Lupuna tree' },
       { icon: 'bi-flower1', label: 'Botanical walk' },
-      { icon: 'bi-water', label: 'Artisanal fishing' },
       { icon: 'bi-people', label: 'Native communities' },
-      { icon: 'bi-moon-stars', label: 'Sunset with dolphins' },
+      { icon: 'bi-eye', label: 'Tourist viewpoint' },
+      { icon: 'bi-feather', label: 'Bird watching' },
+      { icon: 'bi-compass', label: 'Canoe exploration' },
+      { icon: 'bi-droplet', label: 'Pink or grey dolphin watching' },
+      { icon: 'bi-water', label: 'Traditional sport fishing' },
+      { icon: 'bi-binoculars', label: 'Reptile and mammal watching' },
     ],
     days: [
       {
@@ -522,9 +553,9 @@ const toursEn = {
       },
       {
         day: 2,
-        title: 'Viewpoint – Lupuna Tree – Fundo Don Pedrito – Botanical Walk',
+        title: 'Lupuna Tree – Fundo Don Pedrito – Botanical Walk',
         activities: [
-          'At 9:30am departure to the Tourist Viewpoint in Independencia native community (approx. 25 min).',
+          'At 9:30am departure to Independencia native community (approx. 25 min).',
           'Enjoy the landscape towards the Amazon River and relax in hammocks (25 min).',
           'Visit to the giant Lupuna (Ceiba) tree: photo session and guide explanation about its origins.',
           'Visit to Fundo Don Pedrito: sighting of the paiche (largest freshwater fish), caimans, anaconda and turtles.',
@@ -534,10 +565,10 @@ const toursEn = {
       },
       {
         day: 3,
-        title: 'Artisanal Fishing – Lunch – Return to Iquitos',
+        title: 'Sport Fishing – Lunch – Return to Iquitos',
         activities: [
-          'At 9:30am departure for artisanal and sport fishing.',
-          'The guide will explain traditional artisanal fishing techniques.',
+          'At 9:30am departure for traditional sport fishing.',
+          'The guide will explain traditional fishing techniques.',
           'Enjoy the Amazonian scenery. Option to purchase soft drinks, beers and Amazonian ceviche.',
           'Return to the lodge for lunch.',
           'Pack luggage and return to Iquitos city.',
@@ -549,7 +580,7 @@ const toursEn = {
   'fullday-amazonas': {
     name: 'Full Day Amazonas',
     subtitle: '1 Full Day',
-    description: 'A full day navigating the great Amazon River. Tourist viewpoint, Fundo Don Pedrito, Yahuas community, Monkey Island and a typical Amazonian lunch.',
+    description: 'A full day navigating the great Amazon River. Fundo Don Pedrito, Yahuas community, Monkey Island and a typical Amazonian lunch.',
     includes: ['River and land transport', 'Professional local guide', 'Lunch at our lodge'],
     notIncludes: [],
     toBring: ['Sunscreen', 'Bug repellent', 'Rain poncho', 'Long shirt and pants'],
@@ -559,7 +590,9 @@ const toursEn = {
       { icon: 'bi-people', label: 'Yahuas community' },
       { icon: 'bi-emoji-smile', label: 'Monkey Island' },
       { icon: 'bi-cup-hot', label: 'Typical lunch' },
-      { icon: 'bi-droplet', label: 'Pink dolphin' },
+      { icon: 'bi-droplet', label: 'Pink or grey dolphin watching' },
+      { icon: 'bi-binoculars', label: 'Reptile and mammal watching' },
+      { icon: 'bi-gem', label: 'Indigenous weapons and crafts' },
     ],
     days: [
       {
@@ -568,7 +601,7 @@ const toursEn = {
         activities: [
           'First stop at Bella Vista Nanay port. The guide will provide an overview of the Nanay and Amazon rivers and typical Amazonian cuisine.',
           'Boat departure at 9:30am.',
-          'Approx. 35-minute navigation to the Tourist Viewpoint in Independencia native community: beautiful Amazon River landscape and rest in hammocks (20 min).',
+          'Approx. 35-minute navigation to Independencia native community: beautiful Amazon River landscape and rest in hammocks (20 min).',
           'Visit to the giant Lupuna (Ceiba) tree: photo session.',
           'Visit to Fundo Don Pedrito: sighting of the paiche (largest freshwater fish), caimans, anaconda and turtles.',
           'Visit to Yahuas native community: culture and traditions, blowpipe (pukuna) demonstration with visitor participation. Tasting of traditional beverages such as masato and pururuka.',
@@ -594,6 +627,7 @@ const toursEn = {
       { icon: 'bi-bug', label: 'Insectarium' },
       { icon: 'bi-cup-straw', label: 'Artisanal sugar mill' },
       { icon: 'bi-moon-stars', label: 'Amazonian sunset' },
+      { icon: 'bi-binoculars', label: 'Reptile and mammal watching' },
     ],
     days: [
       {

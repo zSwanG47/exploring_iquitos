@@ -1,4 +1,5 @@
 import { useState, useEffect, useCallback } from 'react'
+import { Link } from 'react-router-dom'
 import { useLang } from '../context/LanguageContext'
 import { galleryPhotos } from '../data/galleryPhotos'
 import '../styles/gallery-carousel.css'
@@ -21,7 +22,7 @@ function MarqueeRow({ photos, reverse = false }) {
   )
 }
 
-export default function Gallery() {
+export default function GalleryEjemplo() {
   const { t, lang } = useLang()
   const tg = t.gallery
   const [index, setIndex] = useState(0)
@@ -46,13 +47,20 @@ export default function Gallery() {
     : 'Exploring Iquitos — Galería Amazonía'
 
   return (
-    <section id="galeria" className="gallery-v2">
+    <section className="gallery-v2">
       <div className="container">
         <header className="gallery-v2__header">
           <p className="gallery-v2__eyebrow">Exploring Iquitos</p>
-          <h2 className="gallery-v2__title">{tg.sectionTitle}</h2>
+          <h1 className="gallery-v2__title">{tg.sectionTitle}</h1>
           <p className="gallery-v2__subtitle">{tg.subtitle}</p>
         </header>
+
+        <div className="gallery-v2__demo-banner">
+          <i className="bi bi-palette-fill" aria-hidden="true" />
+          {lang === 'en'
+            ? `Design preview — ${total} photos with auto carousel + scrolling strip`
+            : `Vista de ejemplo — ${total} fotos con carrusel automático y cinta deslizante`}
+        </div>
 
         <div
           className="gallery-v2__carousel"
@@ -101,8 +109,22 @@ export default function Gallery() {
           </div>
         </div>
 
+        <p className="gallery-v2__marquee-label">
+          {lang === 'en' ? 'All moments — continuous scroll' : 'Todos los momentos — desplazamiento continuo'}
+        </p>
         <MarqueeRow photos={galleryPhotos.slice(0, half)} />
         <MarqueeRow photos={galleryPhotos.slice(half)} reverse />
+
+        <div className="text-center mt-5 d-flex flex-wrap justify-content-center gap-3">
+          <Link to="/ejemplo-galeria-2" className="btn btn-outline-success px-4 py-2 fw-semibold">
+            <i className="bi bi-box-seam me-2" />
+            {lang === 'en' ? 'Preview B (3D coverflow)' : 'Prueba B (carrusel 3D)'}
+          </Link>
+          <Link to="/galeria" className="btn btn-success px-4 py-2 fw-semibold">
+            <i className="bi bi-arrow-left me-2" />
+            {lang === 'en' ? 'View current gallery' : 'Ver galería actual'}
+          </Link>
+        </div>
       </div>
     </section>
   )

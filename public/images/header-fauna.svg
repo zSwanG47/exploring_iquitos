@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="88" viewBox="0 0 1200 88" fill="none">
+  <!-- Loro — izquierda -->
+  <g fill="#ffffff" fill-opacity="0.34" transform="translate(8 10)">
+    <path d="M12 52 C12 28 32 14 54 16 C68 18 78 28 80 42 C82 54 76 62 66 66 L62 78 L56 66 C42 64 28 58 18 48 C14 42 12 52 12 52 Z"/>
+    <path d="M80 42 L98 26 L94 38 L104 32 L88 48 Z"/>
+    <circle cx="62" cy="38" r="3.5" fill="#0a2818" fill-opacity="0.45"/>
+    <path d="M42 66 C36 78 30 88 24 98 C32 88 38 78 44 72"/>
+    <path d="M62 66 C68 80 74 90 80 100 C72 90 66 80 60 74"/>
+  </g>
+
+  <!-- Jaguar — izquierda-centro -->
+  <g fill="#ffffff" fill-opacity="0.32" transform="translate(130 26)">
+    <path d="M4 32 C12 22 30 16 52 18 C72 20 88 30 94 44 C98 56 92 66 78 70 C70 72 60 70 54 64 L50 58 C42 62 28 64 16 58 C6 52 0 42 4 32 Z"/>
+    <circle cx="76" cy="36" r="3" fill="#0a2818" fill-opacity="0.45"/>
+    <path d="M94 44 C102 38 110 38 116 42 C110 46 102 46 96 44 Z"/>
+    <circle cx="28" cy="28" r="4" fill="#0a2818" fill-opacity="0.25"/>
+    <circle cx="48" cy="24" r="3.5" fill="#0a2818" fill-opacity="0.25"/>
+    <circle cx="62" cy="30" r="3" fill="#0a2818" fill-opacity="0.22"/>
+    <path d="M16 56 L14 66 M26 58 L24 68 M38 60 L36 70 M50 58 L48 68" stroke="#fff" stroke-width="1.5" stroke-opacity="0.3"/>
+  </g>
+
+  <!-- Delfín — derecha -->
+  <g fill="#e8ffe8" fill-opacity="0.38" transform="translate(900 6)">
+    <path d="M8 58 C28 8 68 18 98 38 C118 50 138 42 158 28 C168 22 176 26 180 32 L192 22 L184 36 L198 30 C178 48 148 58 118 52 C82 44 48 58 28 68 C18 72 10 68 8 58 Z"/>
+    <ellipse cx="92" cy="40" rx="4" ry="2.5" fill="#0a2818" fill-opacity="0.4"/>
+  </g>
+
+  <!-- Mono — derecha -->
+  <g fill="#ffffff" fill-opacity="0.33" transform="translate(1060 4)">
+    <circle cx="52" cy="22" r="14"/>
+    <ellipse cx="72" cy="28" rx="10" ry="8"/>
+    <path d="M44 34 C36 38 28 48 24 58 C32 52 40 46 48 44 L46 56 C42 68 34 78 26 84 C20 88 16 82 18 72 C22 60 32 50 42 46 L40 36 C32 40 22 38 18 30 C14 20 22 10 34 8 C42 6 48 8 52 14"/>
+    <circle cx="56" cy="20" r="2.5" fill="#0a2818" fill-opacity="0.45"/>
+    <path d="M26 84 C18 96 12 108 8 72 C14 80 20 72 26 84 Z" fill-opacity="0.22"/>
+  </g>
+</svg>
