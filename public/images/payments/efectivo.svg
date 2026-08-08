@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 130 40" role="img" aria-label="Efectivo">
+  <rect width="130" height="40" rx="6" fill="#fff"/>
+  <rect x="8" y="10" width="28" height="20" rx="3" fill="#1d7a3d"/>
+  <text x="22" y="24" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" font-weight="700" fill="#fff">S/</text>
+  <text x="44" y="27" font-family="Arial, sans-serif" font-size="15" font-weight="800" fill="#1d7a3d">EFECTIVO</text>
+</svg>

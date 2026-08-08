@@ -47,6 +47,7 @@ body {
   align-items: center;
   justify-content: center;
   text-align: center;
+  padding-bottom: 0;
 }
 
 .hero-logo {
@@ -80,6 +81,7 @@ section {
 /* === About === */
 .about-section {
   background-color: var(--green-accent);
+  padding-top: 56px;
 }
 
 /* === Tours === */

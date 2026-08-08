@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96 96" role="img" aria-label="Plin">
+  <defs>
+    <linearGradient id="plin-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#5FE8FF"/>
+      <stop offset="55%" stop-color="#00B8E6"/>
+      <stop offset="100%" stop-color="#0096D6"/>
+    </linearGradient>
+  </defs>
+  <path fill="url(#plin-grad)" d="M48 8c22.1 0 40 17.9 40 40 0 18.2-12.2 33.6-28.9 38.4L48 96l-8.4-9.2C22.9 81.9 8 66.5 8 48 8 25.9 25.9 8 48 8z"/>
+  <text x="48" y="56" text-anchor="middle" font-family="Arial Rounded MT Bold, Segoe UI, Arial, sans-serif" font-size="28" font-weight="800" fill="#fff">plin</text>
+  <circle cx="58.5" cy="33" r="4.2" fill="#FF4DA6"/>
+</svg>

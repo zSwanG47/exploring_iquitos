@@ -6,6 +6,7 @@ import { TourPricesProvider } from './context/TourPricesContext'
 import { NavigationGuardProvider } from './context/NavigationGuardContext'
 import Navbar from './components/Navbar'
 import Hero from './components/Hero'
+import PaymentCarousel from './components/PaymentCarousel'
 import About from './components/About'
 import Tours from './components/Tours'
 import Gallery from './components/Gallery'
@@ -26,6 +27,7 @@ function HomePage() {
   return (
     <>
       <Hero />
+      <PaymentCarousel />
       <About />
       <Tours />
       <Gallery />

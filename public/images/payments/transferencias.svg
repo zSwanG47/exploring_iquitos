@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 170 40" role="img" aria-label="Transferencias">
+  <rect width="170" height="40" rx="6" fill="#fff"/>
+  <path fill="#145228" d="M8 14h16v4H8v-4zm20 0h4l6 6-6 6h-4l6-6-6-6zM8 26h16v4H8v-4z"/>
+  <text x="38" y="27" font-family="Arial, sans-serif" font-size="13" font-weight="800" fill="#145228">TRANSFERENCIAS</text>
+</svg>
