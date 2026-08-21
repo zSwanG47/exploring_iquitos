@@ -5,28 +5,14 @@ import '../styles/gallery-carousel.css'
 
 const AUTO_MS = 4500
 
-function MarqueeRow({ photos, reverse = false }) {
-  const loop = [...photos, ...photos]
-
-  return (
-    <div className={`gallery-v2__marquee-wrap${reverse ? ' gallery-v2__marquee-wrap--reverse' : ''}`}>
-      <div className="gallery-v2__marquee-track">
-        {loop.map((src, i) => (
-          <div className="gallery-v2__marquee-item" key={`${src}-${i}`}>
-            <img src={src} alt="" loading="lazy" />
-          </div>
-        ))}
-      </div>
-    </div>
-  )
-}
-
 export default function Gallery() {
   const { t, lang } = useLang()
   const tg = t.gallery
   const [index, setIndex] = useState(0)
   const [paused, setPaused] = useState(false)
+  const [lightboxIndex, setLightboxIndex] = useState(null)
   const total = galleryPhotos.length
+  const gridPhotos = galleryPhotos
 
   const goTo = useCallback((next) => {
     setIndex((i) => (next + total) % total)
@@ -40,7 +26,27 @@ export default function Gallery() {
     return () => clearInterval(id)
   }, [paused, total])
 
-  const half = Math.ceil(total / 2)
+  useEffect(() => {
+    if (lightboxIndex === null) return undefined
+
+    const onKey = (e) => {
+      if (e.key === 'Escape') setLightboxIndex(null)
+      if (e.key === 'ArrowLeft') {
+        setLightboxIndex((i) => (i - 1 + gridPhotos.length) % gridPhotos.length)
+      }
+      if (e.key === 'ArrowRight') {
+        setLightboxIndex((i) => (i + 1) % gridPhotos.length)
+      }
+    }
+
+    document.body.style.overflow = 'hidden'
+    window.addEventListener('keydown', onKey)
+    return () => {
+      document.body.style.overflow = ''
+      window.removeEventListener('keydown', onKey)
+    }
+  }, [lightboxIndex, gridPhotos.length])
+
   const photoAlt = lang === 'en'
     ? 'Exploring Iquitos — Amazon gallery'
     : 'Exploring Iquitos — Galería Amazonía'
@@ -101,9 +107,70 @@ export default function Gallery() {
           </div>
         </div>
 
-        <MarqueeRow photos={galleryPhotos.slice(0, half)} />
-        <MarqueeRow photos={galleryPhotos.slice(half)} reverse />
+        <div className="gallery-v2__grid">
+          {gridPhotos.map((src, i) => (
+            <button
+              type="button"
+              className="gallery-v2__grid-item"
+              key={src}
+              onClick={() => setLightboxIndex(i)}
+              aria-label={lang === 'en' ? `Open photo ${i + 1}` : `Abrir foto ${i + 1}`}
+            >
+              <img src={src} alt={`${photoAlt} ${i + 1}`} loading="lazy" />
+            </button>
+          ))}
+        </div>
       </div>
+
+      {lightboxIndex !== null && (
+        <div
+          className="gallery-v2__lightbox"
+          role="dialog"
+          aria-modal="true"
+          aria-label={lang === 'en' ? 'Photo viewer' : 'Visor de fotos'}
+          onClick={() => setLightboxIndex(null)}
+        >
+          <button
+            type="button"
+            className="gallery-v2__lightbox-close"
+            onClick={() => setLightboxIndex(null)}
+            aria-label={lang === 'en' ? 'Close' : 'Cerrar'}
+          >
+            <i className="bi bi-x-lg" />
+          </button>
+          <button
+            type="button"
+            className="gallery-v2__lightbox-nav gallery-v2__lightbox-nav--prev"
+            onClick={(e) => {
+              e.stopPropagation()
+              setLightboxIndex((i) => (i - 1 + gridPhotos.length) % gridPhotos.length)
+            }}
+            aria-label={lang === 'en' ? 'Previous photo' : 'Foto anterior'}
+          >
+            <i className="bi bi-chevron-left" />
+          </button>
+          <img
+            src={gridPhotos[lightboxIndex]}
+            alt={`${photoAlt} ${lightboxIndex + 1}`}
+            className="gallery-v2__lightbox-img"
+            onClick={(e) => e.stopPropagation()}
+          />
+          <button
+            type="button"
+            className="gallery-v2__lightbox-nav gallery-v2__lightbox-nav--next"
+            onClick={(e) => {
+              e.stopPropagation()
+              setLightboxIndex((i) => (i + 1) % gridPhotos.length)
+            }}
+            aria-label={lang === 'en' ? 'Next photo' : 'Siguiente foto'}
+          >
+            <i className="bi bi-chevron-right" />
+          </button>
+          <span className="gallery-v2__lightbox-counter">
+            {lightboxIndex + 1} / {gridPhotos.length}
+          </span>
+        </div>
+      )}
     </section>
   )
 }

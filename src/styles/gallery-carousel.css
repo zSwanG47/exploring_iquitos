@@ -172,68 +172,139 @@
   display: none;
 }
 
-/* ── Marquee continuo ── */
+/* ── Grid 4 columnas ── */
 
-.gallery-v2__marquee-wrap {
-  overflow: hidden;
-  margin-bottom: 12px;
-  mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
-}
-
-.gallery-v2__marquee-track {
-  display: flex;
+.gallery-v2__grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
   gap: 14px;
-  width: max-content;
-  animation: gallery-v2-marquee 55s linear infinite;
+  max-width: 960px;
+  margin: 0 auto;
 }
 
-.gallery-v2__marquee-wrap--reverse .gallery-v2__marquee-track {
-  animation-direction: reverse;
-  animation-duration: 48s;
-}
-
-.gallery-v2__marquee-wrap:hover .gallery-v2__marquee-track {
-  animation-play-state: paused;
-}
-
-.gallery-v2__marquee-item {
-  flex-shrink: 0;
-  width: 200px;
-  height: 130px;
+.gallery-v2__grid-item {
+  position: relative;
+  display: block;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  padding: 0;
+  border: none;
   border-radius: 12px;
   overflow: hidden;
+  cursor: pointer;
+  background: var(--g-teal-deep);
   box-shadow: 0 4px 16px rgba(6, 42, 31, 0.12);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
 
-.gallery-v2__marquee-item img {
+.gallery-v2__grid-item:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 28px rgba(6, 42, 31, 0.2);
+}
+
+.gallery-v2__grid-item:focus-visible {
+  outline: 3px solid var(--g-green-bright);
+  outline-offset: 2px;
+}
+
+.gallery-v2__grid-item img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   display: block;
+  transition: transform 0.35s ease;
 }
 
-.gallery-v2__marquee-label {
-  text-align: center;
-  font-size: 0.78rem;
-  font-weight: 600;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--g-green-bright);
-  margin-bottom: 14px;
+.gallery-v2__grid-item:hover img {
+  transform: scale(1.05);
 }
 
-@keyframes gallery-v2-marquee {
-  from { transform: translateX(0); }
-  to { transform: translateX(-50%); }
+/* ── Lightbox ── */
+
+.gallery-v2__lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 2000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(6, 42, 31, 0.88);
+  backdrop-filter: blur(6px);
+  padding: 24px;
+}
+
+.gallery-v2__lightbox-img {
+  max-width: min(92vw, 1100px);
+  max-height: 85vh;
+  object-fit: contain;
+  border-radius: 12px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.45);
+}
+
+.gallery-v2__lightbox-close {
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  width: 44px;
+  height: 44px;
+  border: none;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.95);
+  color: var(--g-teal-deep);
+  font-size: 1.1rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1;
+}
+
+.gallery-v2__lightbox-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 48px;
+  height: 48px;
+  border: none;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.95);
+  color: var(--g-teal-deep);
+  font-size: 1.2rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1;
+}
+
+.gallery-v2__lightbox-nav--prev { left: 16px; }
+.gallery-v2__lightbox-nav--next { right: 16px; }
+
+.gallery-v2__lightbox-counter {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 6px 14px;
+  border-radius: 100px;
+  background: rgba(255, 255, 255, 0.15);
+  color: #fff;
+  font-size: 0.85rem;
+  font-weight: 700;
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .gallery-v2__marquee-track {
-    animation: none;
-  }
-
-  .gallery-v2__slide {
+  .gallery-v2__slide,
+  .gallery-v2__grid-item,
+  .gallery-v2__grid-item img {
     transition: none;
+  }
+}
+
+@media (max-width: 991.98px) {
+  .gallery-v2__grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
   }
 }
 
@@ -255,8 +326,16 @@
   .gallery-v2__nav--prev { left: 10px; }
   .gallery-v2__nav--next { right: 10px; }
 
-  .gallery-v2__marquee-item {
-    width: 160px;
-    height: 105px;
+  .gallery-v2__grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
   }
+
+  .gallery-v2__lightbox-nav {
+    width: 40px;
+    height: 40px;
+  }
+
+  .gallery-v2__lightbox-nav--prev { left: 8px; }
+  .gallery-v2__lightbox-nav--next { right: 8px; }
 }
